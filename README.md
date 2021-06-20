@@ -1,16 +1,22 @@
-# Fabric Example Mod - Kotlin
-![Gradle build](https://github.com/natanfudge/fabric-example-mod-kotlin/workflows/Gradle%20build/badge.svg)
-## Setup
+<h1 align="center"> Tech Droid </h1>
+<p align="center"> Change yourself with modules, plugins and armor to transform into an Droid. </p>
+<p align="center">
+   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-brightgreen.svg"><a>
+      <a href="https://github.com/Rochedo098/Planets-and-Stars/">  <img src="http://cf.way2muchnoise.eu/versions/391708_latest.svg"> <a>
+</p> 
 
-0. Create a new mod repository by pressing the "Use this template" button and clone the created repository.
+## Building From Source
 
-1. Import build.gradle file with IntelliJ IDEA
+### Linux
 
-2. Edit build.gradle and mod.json to suit your needs.
-    * The "mixins" object can be removed from mod.json if you do not need to use mixins.
-    * Please replace all occurences of "modid" with your own mod ID - sometimes, a different string may also suffice.
-3. Run!
+Run `./gradlew build`, the compiled jar will be in the `/build/libs` folder.  
+You must obtain the file without -dev and -sources.
+
+### Windows
+
+Run `gradlew.bat build`, the compiled jar will be in the `/build/libs` folder.  
+You must obtain the file without -dev and -sources.
 
 ## License
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+This project is available under the Apache License, Version 2.0. See `LICENSE` for more information
