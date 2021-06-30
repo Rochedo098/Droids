@@ -3,7 +3,7 @@
   "package": "com.github.rochedo.droids.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-
+    "common.MixinPlayerEntity"
   ],
   "client": [
 
