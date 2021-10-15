@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LsS",
+    "s3s",
+    "121"
+  ],
+  "key": {
+    "L": {
+      "tag": "c:lead_ingots"
+    },
+    "s": {
+      "tag": "c:steel_ingots"
+    },
+    "S": {
+      "tag": "c:silver_ingots"
+    },
+    "1": {
+      "item": "minecraft:lava_bucket"
+    },
+    "2": {
+      "item": "minecraft:copper_ingot"
+    },
+    "3": {
+      "item": "droids:resistance_module"
+    }
+  },
+  "result": {
+    "item": "droids:fire_resistance_module",
+    "count": 1
+  }
+}

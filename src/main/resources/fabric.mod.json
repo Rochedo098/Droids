@@ -8,7 +8,11 @@
   "authors": [
     "Rochedo098"
   ],
-  "contact": {},
+  "contact": {
+    "homepage": "https://rochedo098.github.io/",
+    "sources": "https://github.com/Rochedo098/Droids",
+    "issues": "https://github.com/Rochedo098/Droids/issues"
+  },
 
   "license": "Apache-2.0",
   "icon": "assets/droids/icon.png",
@@ -18,22 +22,24 @@
     "main": [
       {
         "adapter": "kotlin",
-        "value": "com.github.rochedo.droids.Droids"
+        "value": "com.github.rochedo098.droids.Droids"
       }
     ],
     "client": [
       {
         "adapter": "kotlin",
-        "value": "com.github.rochedo.droids.DroidsClient"
+        "value": "com.github.rochedo098.droids.DroidsClient"
       }
     ]
   },
+
   "mixins": [
     "droids.mixins.json"
   ],
+
   "depends": {
     "fabricloader": ">=0.8.7",
-    "fabric": "*",
+    "fabric": ">=0.38.1",
     "fabric-language-kotlin": "*",
     "minecraft": "1.17.x"
   },

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LsS",
+    "s3s",
+    "222"
+  ],
+  "key": {
+    "L": {
+      "tag": "c:lead_ingots"
+    },
+    "s": {
+      "tag": "c:steel_ingots"
+    },
+    "S": {
+      "tag": "c:silver_ingots"
+    },
+    "2": {
+      "item": "minecraft:copper_ingot"
+    },
+    "3": {
+      "tag": "c:tin_ingots"
+    }
+  },
+  "result": {
+    "item": "droids:basic_module",
+    "count": 4
+  }
+}
+

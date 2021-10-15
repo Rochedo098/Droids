@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LsS",
+    "s3s",
+    "121"
+  ],
+  "key": {
+    "L": {
+      "tag": "c:lead_ingots"
+    },
+    "s": {
+      "tag": "c:steel_ingots"
+    },
+    "S": {
+      "tag": "c:silver_ingots"
+    },
+    "1": {
+      "item": "minecraft:copper_ingot"
+    },
+    "2": {
+      "item": "droids:basic_module"
+    },
+    "3": {
+      "item": "minecraft:golden_carrot"
+    }
+  },
+  "result": {
+    "item": "droids:night_vision_module",
+    "count": 1
+  }
+}
+

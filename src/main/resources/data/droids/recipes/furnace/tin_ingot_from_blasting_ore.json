@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "droids:tin_ore"
+  },
+  "result": "droids:tin_ingot",
+  "experience": 0.7,
+  "cookingtime": 200
+}

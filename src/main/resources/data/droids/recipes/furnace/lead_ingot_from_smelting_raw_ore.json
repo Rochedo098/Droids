@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "droids:raw_lead"
+  },
+  "result": "droids:lead_ingot",
+  "experience": 0.7,
+  "cookingtime": 200
+}

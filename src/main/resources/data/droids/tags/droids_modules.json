@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "droids:fire_resistance_module",
+    "droids:health_boost_module",
+    "droids:night_vision_module",
+    "droids:regeneration_module",
+    "droids:resistance_module",
+    "droids:speed_module"
+  ]
+}

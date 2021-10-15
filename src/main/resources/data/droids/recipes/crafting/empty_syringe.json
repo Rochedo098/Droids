@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  I",
+    " Is",
+    "S  "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "s": {
+      "tag": "c:steel_ingots"
+    },
+    "S": {
+      "tag": "c:silver_ingots"
+    }
+  },
+  "result": {
+    "item": "droids:empty_syringe",
+    "count": 1
+  }
+}

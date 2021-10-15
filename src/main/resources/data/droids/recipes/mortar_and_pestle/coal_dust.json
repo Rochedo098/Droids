@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "droids:mortar_and_pestle",
+      "remainder": { "item": "droids:mortar_and_pestle" }
+    },
+    {
+      "item": "minecraft:coal"
+    }
+  ],
+  "result": {
+    "item": "droids:coal_dust",
+    "count": 1
+  }
+}

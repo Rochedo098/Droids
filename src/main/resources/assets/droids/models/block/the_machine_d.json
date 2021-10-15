@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "droids:block/the_machine/down_front",
+    "top": "droids:block/the_machine/base_steel",
+    "bottom": "droids:block/the_machine/base_steel",
+    "side": "droids:block/the_machine/base_steel_down"
+  }
+}

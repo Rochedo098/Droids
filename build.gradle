@@ -1,73 +1,117 @@
 plugins {
-    id 'fabric-loom'
+    id "fabric-loom" version "0.9-SNAPSHOT"
     id 'maven-publish'
-    id "org.jetbrains.kotlin.jvm"
+    id "org.jetbrains.kotlin.jvm" version "1.5.10"
 }
 
-sourceCompatibility = JavaVersion.VERSION_16
-targetCompatibility = JavaVersion.VERSION_16
-
-archivesBaseName = project.archives_base_name
-version = project.mod_version
-group = project.maven_group
-
-repositories {
-
-}
+archivesBaseName = "Droids"
+version = "0.1.0"
+group = "com.github.rochedo098"
 
 dependencies {
-    // Minecraft and Fabric Loader
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
     // Fabric API.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
+    modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
+    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+
+    include(modImplementation("de.siphalor:nbtcrafting-1.17:2.0.22+mc1.17.1"))
+
+    api project(":DroidsAPI")
+    include project(":DroidsAPI")
+
+    modApi "net.fabricmc.fabric-api:fabric-transfer-api-v1:${project.transfer_api_version}"
+    include "net.fabricmc.fabric-api:fabric-transfer-api-v1:${project.transfer_api_version}"
+
+    modImplementation "teamreborn:energy:${project.techreborn_energy}"
+
 }
 
-processResources {
-    inputs.property "version", project.version
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version
-    }
-}
+compileKotlin.kotlinOptions.jvmTarget = "16"
 
-tasks.withType(JavaCompile) {
-    it.options.encoding = "UTF-8"
-    it.options.release = 16
-}
+allprojects {
+    apply plugin: "fabric-loom"
+    apply plugin: "maven-publish"
 
-java {
-    withSourcesJar()
-}
+    sourceCompatibility = JavaVersion.VERSION_16
+    targetCompatibility = JavaVersion.VERSION_16
 
-jar {
-    from ("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}"}
-    }
-}
+    repositories {
+        maven {
+            name = "ModMenu"
+            url = "https://maven.terraformersmc.com/releases/"
+        }
 
-/*
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            // add all the jars that should be included when publishing to maven
-            artifact(remapJar) {
-                builtBy remapJar
+        maven {
+            name = "CottonMC"
+            url = "https://server.bbkr.space/artifactory/libs-release"
+        }
+
+        maven {
+            name "Siphalor's Maven"
+            url "https://maven.siphalor.de"
+        }
+
+        maven {
+            name = "Technici4n"
+            url = "https://raw.githubusercontent.com/Technici4n/Technici4n-maven/master/"
+            content {
+                includeGroup "net.fabricmc.fabric-api"
             }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
+        }
+
+        maven {
+            name = "Modmuss50"
+            url = "https://maven.modmuss50.me/"
+            content {
+                includeGroup "teamreborn"
             }
         }
     }
 
-    // select the repositories you want to publish to
-    repositories {
-        // uncomment to publish to the local maven
-        // mavenLocal()
+    dependencies {
+        // Minecraft and Fabric Loader
+        minecraft "com.mojang:minecraft:${project.minecraft_version}"
+        mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+        modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    }
+
+    processResources {
+        inputs.property "version", project.version
+        filesMatching("fabric.mod.json") {
+            expand "version": project.version
+        }
+    }
+
+    tasks.withType(JavaCompile) {
+        it.options.encoding = "UTF-8"
+        it.options.release = 16
+    }
+
+    java {
+        withSourcesJar()
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                artifact(remapJar) {
+                    builtBy remapJar
+                }
+                artifact(sourcesJar) {
+                    builtBy remapSourcesJar
+                }
+            }
+        }
+
+        repositories {
+            mavenLocal()
+        }
+    }
+
+    jar {
+        from ("LICENSE") {
+            rename { "${it}_${project.archivesBaseName}"}
+        }
     }
 }
-*/
-
-compileKotlin.kotlinOptions.jvmTarget = "16"

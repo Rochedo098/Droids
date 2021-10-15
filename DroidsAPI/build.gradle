@@ -1,0 +1,8 @@
+archivesBaseName = "DroidsAPI"
+version = "0.1.1"
+group = "com.github.rochedo098"
+
+dependencies {
+    modImplementation "net.fabricmc.fabric-api:fabric-registry-sync-v0:0.7.9+f08a69e132"
+    modImplementation "net.fabricmc.fabric-api:fabric-rendering-v1:1.8.0+b06cb95b18"
+}

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.github.rochedo098.droidsapi.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "common.MixinPlayerEntity"
+  ],
+  "client": [
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
