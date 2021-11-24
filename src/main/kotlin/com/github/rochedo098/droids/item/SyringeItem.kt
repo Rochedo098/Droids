@@ -1,4 +1,4 @@
-package com.github.rochedo098.droids.registry.item
+package com.github.rochedo098.droids.item
 
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.damage.DamageSource

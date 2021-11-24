@@ -6,7 +6,6 @@
     "common.MixinPlayerEntity"
   ],
   "client": [
-
   ],
   "injectors": {
     "defaultRequire": 1

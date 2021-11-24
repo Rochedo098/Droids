@@ -1,4 +1,4 @@
-package com.github.rochedo098.droids.registry.block
+package com.github.rochedo098.droids.block
 
 interface TheMachineInterface {
     var owner: String

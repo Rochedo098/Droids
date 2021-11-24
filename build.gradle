@@ -13,7 +13,6 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
 
-    modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
     modImplementation include("de.siphalor:nbtcrafting-1.17:2.0.22+mc1.17.1")
     modImplementation include("teamreborn:energy:${project.techreborn_energy}")
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"

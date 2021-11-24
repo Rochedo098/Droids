@@ -1,4 +1,4 @@
-package com.github.rochedo098.droids.registry.block
+package com.github.rochedo098.droids.block
 
 import com.github.rochedo098.droids.Droids
 import com.github.rochedo098.droids.utils.ImplementedInventory
@@ -25,12 +25,7 @@ class TheMachineBlockEntityU(pos: BlockPos, state: BlockState):
     }
 
     override fun createMenu(syncId: Int, inv: PlayerInventory?, player: PlayerEntity?): ScreenHandler {
-        return TheMachineGUI(
-            Droids.THE_MACHINE_SCREEN,
-            syncId,
-            inv,
-            ScreenHandlerContext.create(world, pos)
-        )
+        TODO("Not yet implemented")
     }
 
     override fun getDisplayName(): Text {

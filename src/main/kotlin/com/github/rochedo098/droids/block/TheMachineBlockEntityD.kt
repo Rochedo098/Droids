@@ -1,4 +1,4 @@
-package com.github.rochedo098.droids.registry.block
+package com.github.rochedo098.droids.block
 
 import com.github.rochedo098.droids.Droids
 import net.minecraft.block.BlockState

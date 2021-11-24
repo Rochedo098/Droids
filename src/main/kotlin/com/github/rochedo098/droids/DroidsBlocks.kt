@@ -1,8 +1,8 @@
-package com.github.rochedo098.droids.registry
+package com.github.rochedo098.droids
 
 import com.github.rochedo098.droids.Droids.myIdentifier
-import com.github.rochedo098.droids.registry.DroidsItems.itemSettings
-import com.github.rochedo098.droids.registry.block.TheMachineBlockU
+import com.github.rochedo098.droids.DroidsItems.itemSettings
+import com.github.rochedo098.droids.block.TheMachineBlockU
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block

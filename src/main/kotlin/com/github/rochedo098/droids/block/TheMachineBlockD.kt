@@ -1,10 +1,12 @@
-package com.github.rochedo098.droids.registry.block
+package com.github.rochedo098.droids.block
 
-import com.github.rochedo098.droids.registry.DroidsBlocks
+import com.github.rochedo098.droids.DroidsBlocks
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
+import net.minecraft.item.ItemStack
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.text.LiteralText
@@ -15,7 +17,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
-class TheMachineBlockU(settings: Settings): BlockWithEntity(settings) {
+class TheMachineBlockD(settings: Settings): BlockWithEntity(settings) {
     init {
         defaultState = this.stateManager.defaultState.with(Properties.HORIZONTAL_FACING, Direction.NORTH)
     }
@@ -36,8 +38,8 @@ class TheMachineBlockU(settings: Settings): BlockWithEntity(settings) {
         hand: Hand?,
         hit: BlockHitResult?
     ): ActionResult {
-        if (world.getBlockState(pos.down()).block == DroidsBlocks.THE_MACHINE_D) {
-            player.openHandledScreen(state.createScreenHandlerFactory(world, pos))
+        if (world.getBlockState(pos.up()).block == DroidsBlocks.THE_MACHINE_U) {
+            player.sendMessage(LiteralText("Use the up block of the machine"), true)
             return ActionResult.SUCCESS
         } else {
             player.sendMessage(LiteralText("You need the rest of machine"), true)
@@ -45,8 +47,18 @@ class TheMachineBlockU(settings: Settings): BlockWithEntity(settings) {
         }
     }
 
+    override fun onPlaced(
+        world: World?,
+        pos: BlockPos,
+        state: BlockState,
+        placer: LivingEntity?,
+        itemStack: ItemStack?
+    ) {
+        TheMachineBlockEntityD(pos, state).setOwnerName(placer!!.name.toString())
+    }
+
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return TheMachineBlockEntityU(pos, state)
+        return TheMachineBlockEntityD(pos, state)
     }
 
     override fun getRenderType(state: BlockState?): BlockRenderType {

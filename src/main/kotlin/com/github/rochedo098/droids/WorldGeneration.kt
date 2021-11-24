@@ -1,4 +1,4 @@
-package com.github.rochedo098.droids.registry
+package com.github.rochedo098.droids
 
 import com.github.rochedo098.droids.Droids.myIdentifier
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications

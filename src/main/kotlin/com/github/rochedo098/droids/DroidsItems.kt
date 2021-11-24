@@ -1,9 +1,9 @@
-package com.github.rochedo098.droids.registry
+package com.github.rochedo098.droids
 
-import com.github.rochedo098.droids.Droids
 import com.github.rochedo098.droids.Droids.myIdentifier
-import com.github.rochedo098.droids.registry.item.DroidsModules
-import com.github.rochedo098.droids.registry.item.SyringeItem
+import com.github.rochedo098.droids.item.DroidsModules
+import com.github.rochedo098.droids.item.ModuleArmor
+import com.github.rochedo098.droids.item.SyringeItem
 import com.github.rochedo098.droidsapi.api.registry.ModificationRegistry
 import com.github.rochedo098.droidsapi.api.registry.RegistryTypes
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
@@ -48,5 +48,7 @@ object DroidsItems {
 
         item("empty_syringe", SyringeItem.Empty(itemSettings()))
         item("full_syringe", SyringeItem.Full(itemSettings()))
+
+        item("module_armor", ModuleArmor.ModuleArmorItem())
     }
 }
