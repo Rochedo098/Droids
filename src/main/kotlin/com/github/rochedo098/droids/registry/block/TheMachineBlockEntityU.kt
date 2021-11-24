@@ -1,7 +1,7 @@
 package com.github.rochedo098.droids.registry.block
 
 import com.github.rochedo098.droids.Droids
-import com.github.rochedo098.droids.javapi.ImplementedInventory
+import com.github.rochedo098.droids.utils.ImplementedInventory
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity

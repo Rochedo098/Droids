@@ -1,5 +1,5 @@
 plugins {
-    id "fabric-loom" version "0.9-SNAPSHOT"
+    id "fabric-loom" version "0.10-SNAPSHOT"
     id 'maven-publish'
     id "org.jetbrains.kotlin.jvm" version "1.5.10"
 }
@@ -12,18 +12,13 @@ dependencies {
     // Fabric API.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
+
     modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
+    modImplementation include("de.siphalor:nbtcrafting-1.17:2.0.22+mc1.17.1")
+    modImplementation include("teamreborn:energy:${project.techreborn_energy}")
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
-    include(modImplementation("de.siphalor:nbtcrafting-1.17:2.0.22+mc1.17.1"))
-
-    api project(":DroidsAPI")
-    include project(":DroidsAPI")
-
-    modApi "net.fabricmc.fabric-api:fabric-transfer-api-v1:${project.transfer_api_version}"
-    include "net.fabricmc.fabric-api:fabric-transfer-api-v1:${project.transfer_api_version}"
-
-    modImplementation "teamreborn:energy:${project.techreborn_energy}"
+    api include(project(":DroidsAPI"))
 
 }
 
@@ -50,14 +45,6 @@ allprojects {
         maven {
             name "Siphalor's Maven"
             url "https://maven.siphalor.de"
-        }
-
-        maven {
-            name = "Technici4n"
-            url = "https://raw.githubusercontent.com/Technici4n/Technici4n-maven/master/"
-            content {
-                includeGroup "net.fabricmc.fabric-api"
-            }
         }
 
         maven {

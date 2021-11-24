@@ -1,10 +1,8 @@
-package com.github.rochedo098.droids.utils
+package com.github.rochedo098.droids.registry
 
-import com.github.rochedo098.droids.registry.DroidsBlocks
+import com.github.rochedo098.droids.Droids.myIdentifier
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
-import net.minecraft.block.Blocks
-import net.minecraft.util.Identifier
 import net.minecraft.util.registry.BuiltinRegistries
 import net.minecraft.util.registry.Registry
 import net.minecraft.util.registry.RegistryKey
@@ -23,7 +21,7 @@ object WorldGeneration {
         .configure(
             OreFeatureConfig(
                 OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
-                DroidsBlocks.TIN_ORE.defaultState,
+                DroidsBlocks.TIN_ORE!!.defaultState,
                 6
             )
         ) // Vein size
@@ -39,7 +37,7 @@ object WorldGeneration {
         .configure(
             OreFeatureConfig(
                 OreFeatureConfig.Rules.DEEPSLATE_ORE_REPLACEABLES,
-                DroidsBlocks.DEEPSLATE_TIN_ORE.defaultState,
+                DroidsBlocks.DEEPSLATE_TIN_ORE!!.defaultState,
                 4
             )
         ) // Vein size
@@ -56,7 +54,7 @@ object WorldGeneration {
         .configure(
             OreFeatureConfig(
                 OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
-                DroidsBlocks.LEAD_ORE.defaultState,
+                DroidsBlocks.LEAD_ORE!!.defaultState,
                 5
             )
         ) // Vein size
@@ -72,7 +70,7 @@ object WorldGeneration {
         .configure(
             OreFeatureConfig(
                 OreFeatureConfig.Rules.DEEPSLATE_ORE_REPLACEABLES,
-                DroidsBlocks.DEEPSLATE_LEAD_ORE.defaultState,
+                DroidsBlocks.DEEPSLATE_LEAD_ORE!!.defaultState,
                 4
             )
         ) // Vein size
@@ -89,7 +87,7 @@ object WorldGeneration {
         .configure(
             OreFeatureConfig(
                 OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
-                DroidsBlocks.SILVER_ORE.defaultState,
+                DroidsBlocks.SILVER_ORE!!.defaultState,
                 5
             )
         ) // Vein size
@@ -105,7 +103,7 @@ object WorldGeneration {
         .configure(
             OreFeatureConfig(
                 OreFeatureConfig.Rules.DEEPSLATE_ORE_REPLACEABLES,
-                DroidsBlocks.DEEPSLATE_SILVER_ORE.defaultState,
+                DroidsBlocks.DEEPSLATE_SILVER_ORE!!.defaultState,
                 4
             )
         ) // Vein size

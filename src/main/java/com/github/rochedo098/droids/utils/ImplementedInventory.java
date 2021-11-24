@@ -1,4 +1,4 @@
-package com.github.rochedo098.droids.javapi;
+package com.github.rochedo098.droids.utils;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;

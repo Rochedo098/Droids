@@ -33,10 +33,6 @@
     ]
   },
 
-  "mixins": [
-    "droids.mixins.json"
-  ],
-
   "depends": {
     "fabricloader": ">=0.8.7",
     "fabric": ">=0.38.1",

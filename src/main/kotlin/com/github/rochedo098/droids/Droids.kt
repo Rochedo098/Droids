@@ -5,7 +5,7 @@ import com.github.rochedo098.droids.registry.DroidsItems
 import com.github.rochedo098.droids.registry.block.TheMachineBlockEntityD
 import com.github.rochedo098.droids.registry.block.TheMachineBlockEntityU
 import com.github.rochedo098.droids.registry.block.TheMachineGUI
-import com.github.rochedo098.droids.utils.myIdentifier
+import com.github.rochedo098.droids.registry.WorldGeneration
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
@@ -14,13 +14,14 @@ import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.ScreenHandlerType
+import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
-object Droids : ModInitializer {
+object  Droids : ModInitializer {
     val GROUP: ItemGroup = FabricItemGroupBuilder.build(myIdentifier("general_group")) { ItemStack { DroidsItems.STEEL_INGOT } }
+    fun myIdentifier(name: String): Identifier = Identifier("droids", name)
 
     // The Machine Up
     var THE_MACHINE_ENTITY_UP: BlockEntityType<TheMachineBlockEntityU>? = null
@@ -30,6 +31,7 @@ object Droids : ModInitializer {
     override fun onInitialize() {
         DroidsBlocks.register()
         DroidsItems.register()
+        WorldGeneration.register()
 
         THE_MACHINE_ENTITY_UP = FabricBlockEntityTypeBuilder.create(::TheMachineBlockEntityU, DroidsBlocks.THE_MACHINE_U).build(null)
         Registry.register(Registry.BLOCK_ENTITY_TYPE, myIdentifier("the_machine_up"), THE_MACHINE_ENTITY_UP)
