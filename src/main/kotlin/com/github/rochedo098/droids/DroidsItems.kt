@@ -39,7 +39,7 @@ object DroidsItems {
         item("advanced_module")
         item("basic_module")
 
-        module("fire_resistance_module", DroidsModules.FireResistanceModule(itemSettings()))
+        ModificationRegistry.register(RegistryTypes.MODULE, myIdentifier("fire_resistance_module"), DroidsModules.FireResistanceModule(itemSettings()))
         module("health_boost_module", DroidsModules.HealthBoostModule(itemSettings()))
         module("night_vision_module", DroidsModules.NightVisionModule(itemSettings()))
         module("regeneration_module", DroidsModules.RegenerationModule(itemSettings()))

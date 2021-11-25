@@ -2,6 +2,7 @@ package com.github.rochedo098.droids
 
 import com.github.rochedo098.droids.Droids.myIdentifier
 import com.github.rochedo098.droids.DroidsItems.itemSettings
+import com.github.rochedo098.droids.block.TheMachineBlockD
 import com.github.rochedo098.droids.block.TheMachineBlockU
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.AbstractBlock
@@ -13,8 +14,8 @@ import net.minecraft.item.Item
 import net.minecraft.util.registry.Registry
 
 object DroidsBlocks {
-    val THE_MACHINE_U: Block = TheMachineBlockU(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK))
-    val THE_MACHINE_D: Block = TheMachineBlockU(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK))
+    val THE_MACHINE_U: Block = TheMachineBlockU.UBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK))
+    val THE_MACHINE_D: Block = TheMachineBlockD.DBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK))
 
     var TIN_ORE: Block? = null
     var LEAD_ORE: Block? = null
