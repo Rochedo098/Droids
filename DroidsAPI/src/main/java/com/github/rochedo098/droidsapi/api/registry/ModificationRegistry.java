@@ -5,9 +5,9 @@ import com.github.rochedo098.droidsapi.api.events.Events;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @ApiStatus.Experimental
 public class ModificationRegistry {

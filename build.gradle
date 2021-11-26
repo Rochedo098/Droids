@@ -13,13 +13,12 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
 
-    modImplementation include("de.siphalor:nbtcrafting-1.17:2.0.22+mc1.17.1")
+    modImplementation include("de.siphalor:nbtcrafting-1.17:${project.nbtcrafting_version}")
     modImplementation include("teamreborn:energy:${project.techreborn_energy}")
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
     api project(path: ":DroidsAPI", configuration: "namedElements")
     include project(":DroidsAPI")
-
 }
 
 compileKotlin.kotlinOptions.jvmTarget = "16"
@@ -52,6 +51,30 @@ allprojects {
             url = "https://maven.modmuss50.me/"
             content {
                 includeGroup "teamreborn"
+            }
+        }
+
+        maven {
+            name = "Technici4n"
+            url = "https://raw.githubusercontent.com/Technici4n/Technici4n-maven/master/"
+            content {
+                includeGroup "dev.latvian.mods"
+            }
+        }
+
+        maven {
+            name = "Saps"
+            url = "https://maven.saps.dev/minecraft"
+            content {
+                includeGroup "dev.latvian.mods"
+            }
+        }
+
+        maven {
+            name = "SheDaniel"
+            url "https://maven.shedaniel.me"
+            content {
+                includeGroup "dev.architectury"
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.github.rochedo098.droids.block
 
 import com.github.rochedo098.droids.Droids
+import com.github.rochedo098.droids.DroidsBlocks
 import com.github.rochedo098.droids.screen.TheMachineUScreenHandler
 import com.github.rochedo098.droids.utils.ImplementedInventory
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
@@ -13,7 +14,6 @@ import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.PacketByteBuf
-import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.state.StateManager
@@ -50,13 +50,16 @@ object TheMachineBlockU {
             hand: Hand?,
             hit: BlockHitResult?
         ): ActionResult {
-            if (!world.isClient) {
-                val screenHandlerFactory = state.createScreenHandlerFactory(world, pos)
-                if (screenHandlerFactory != null) {
-                    player.openHandledScreen(screenHandlerFactory)
+            if (world.getBlockState(pos.down()).block.equals(DroidsBlocks.THE_MACHINE_D)) {
+                if (!world.isClient) {
+                    val screenHandlerFactory = state.createScreenHandlerFactory(world, pos)
+                    if (screenHandlerFactory != null) {
+                        player.openHandledScreen(screenHandlerFactory)
+                    }
                 }
+                return ActionResult.SUCCESS
             }
-            return ActionResult.SUCCESS
+            return ActionResult.FAIL
         }
 
         override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
