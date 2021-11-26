@@ -2,31 +2,44 @@ package com.github.rochedo098.droids.block
 
 import com.github.rochedo098.droids.Droids
 import com.github.rochedo098.droids.DroidsBlocks
+import com.github.rochedo098.droids.recipe.TheMachineRecipe
 import com.github.rochedo098.droids.screen.TheMachineUScreenHandler
 import com.github.rochedo098.droids.utils.ImplementedInventory
+import com.sun.tools.javac.util.List.collector
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
+import net.minecraft.block.entity.BlockEntityTicker
+import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.entity.ItemEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.inventory.CraftingInventory
 import net.minecraft.inventory.Inventories
+import net.minecraft.inventory.Inventory
+import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.PacketByteBuf
+import net.minecraft.recipe.Recipe
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
+import net.minecraft.util.ItemScatterer
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
+import java.util.*
+
 
 object TheMachineBlockU {
     class UBlock(settings: Settings): BlockWithEntity(settings) {
@@ -70,6 +83,16 @@ object TheMachineBlockU {
             return BlockRenderType.MODEL
         }
 
+        override fun <T : BlockEntity?> getTicker(
+            world: World,
+            state: BlockState,
+            type: BlockEntityType<T>
+        ): BlockEntityTicker<T>? {
+            return BlockEntityTicker { world, pos, state, blockEntity ->
+                UEntity.tick(world, pos, state, blockEntity as? UEntity ?: return@BlockEntityTicker)
+            }
+        }
+
         companion object {
             private val FACING = HorizontalFacingBlock.FACING
         }
@@ -106,6 +129,23 @@ object TheMachineBlockU {
 
         companion object {
             const val INVENTORY_SIZE = 9
+            var inventory: Inventory = SimpleInventory(9)
+
+            fun tick(world: World, pos: BlockPos, state: BlockState, ue: UEntity) {
+                val optional: Optional<TheMachineRecipe> = world.server!!
+                    .recipeManager
+                    .getFirstMatch(TheMachineRecipe.Type, inventory as CraftingInventory?, world)
+
+                val recipe = optional.get()
+                if (inventory.getStack(0) != null && inventory.getStack(1) != null && (inventory.getStack(2) == null || inventory.getStack(2) == recipe.output)) {
+                    if (inventory.getStack(2) == null) {
+                        inventory.setStack(2, recipe.output)
+                    } else if (inventory.getStack(2).item == recipe.output.item) {
+                        val count = inventory.getStack(2).count + recipe.output.count
+                        inventory.setStack(2, ItemStack(recipe.output.item, count))
+                    }
+                }
+            }
         }
     }
 }

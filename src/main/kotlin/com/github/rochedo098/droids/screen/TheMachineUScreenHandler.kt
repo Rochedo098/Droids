@@ -1,6 +1,7 @@
 package com.github.rochedo098.droids.screen
 
 import com.github.rochedo098.droids.Droids
+import com.github.rochedo098.droids.block.TheMachineBlockU
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
@@ -10,10 +11,10 @@ import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.slot.Slot
 
 class TheMachineUScreenHandler(syncId: Int, playerInventory: PlayerInventory): ScreenHandler(Droids.THE_MACHINE_SCREEN_HANDLER, syncId) {
-    private var inventory: Inventory = SimpleInventory(9)
+    var inventory: Inventory = TheMachineBlockU.UEntity.inventory
 
     override fun canUse(player: PlayerEntity): Boolean {
-        return this.inventory.canPlayerUse(player)
+        return inventory.canPlayerUse(player)
     }
 
     override fun transferSlot(player: PlayerEntity, invSlot: Int): ItemStack {
