@@ -3,6 +3,7 @@ package com.github.rochedo098.droids
 import com.github.rochedo098.droids.block.TheMachineBlockD.DEntity
 import com.github.rochedo098.droids.block.TheMachineBlockU
 import com.github.rochedo098.droids.block.TheMachineBlockU.UEntity
+import com.github.rochedo098.droids.recipe.TheMachineRecipe
 import com.github.rochedo098.droids.screen.TheMachineUScreenHandler
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
@@ -38,5 +39,8 @@ object  Droids : ModInitializer {
 
         THE_MACHINE_ENTITY_DOWN = FabricBlockEntityTypeBuilder.create(::DEntity, DroidsBlocks.THE_MACHINE_D).build(null)
         Registry.register(Registry.BLOCK_ENTITY_TYPE, myIdentifier("the_machine_down"), THE_MACHINE_ENTITY_DOWN)
+
+        Registry.register(Registry.RECIPE_TYPE, myIdentifier(TheMachineRecipe.Type.ID), TheMachineRecipe.Type)
+        Registry.register(Registry.RECIPE_SERIALIZER, myIdentifier(TheMachineRecipe.Serializer.ID), TheMachineRecipe.Serializer)
     }
 }
