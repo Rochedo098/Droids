@@ -12,7 +12,6 @@ import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.inventory.CraftingInventory
 import net.minecraft.inventory.Inventories
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
@@ -129,7 +128,7 @@ object TheMachineBlockU {
             fun tick(world: World, pos: BlockPos, state: BlockState, ue: UEntity) {
                 val optional: Optional<TheMachineRecipe> = world.server!!
                     .recipeManager
-                    .getFirstMatch(TheMachineRecipe.Type, inventory as CraftingInventory?, world)
+                    .getFirstMatch(TheMachineRecipe.Type, inventory, world)
 
                 val recipe = optional.get()
                 if (inventory.getStack(0) != null && inventory.getStack(1) != null && (inventory.getStack(2) == null || inventory.getStack(2) == recipe.output)) {

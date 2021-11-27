@@ -2,7 +2,7 @@ package com.github.rochedo098.droids.recipe
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import net.minecraft.inventory.CraftingInventory
+import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.recipe.Ingredient
@@ -18,13 +18,13 @@ class TheMachineRecipe(
     val inputA: Ingredient,
     val inputB: Ingredient,
     val result: ItemStack
-): Recipe<CraftingInventory> {
-    override fun matches(inventory: CraftingInventory, world: World?): Boolean {
+): Recipe<Inventory> {
+    override fun matches(inventory: Inventory, world: World?): Boolean {
         if (inventory.size() < 2) return false
         return this.inputA.test(inventory.getStack(0)) && inputB.test(inventory.getStack(1))
     }
 
-    override fun craft(inventory: CraftingInventory?): ItemStack {
+    override fun craft(inventory: Inventory?): ItemStack {
         return this.output.copy()
     }
 

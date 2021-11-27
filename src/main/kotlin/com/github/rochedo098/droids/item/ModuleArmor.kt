@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ArmorItem
 import net.minecraft.item.ArmorMaterial
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NbtList
 import net.minecraft.recipe.Ingredient
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -32,6 +33,11 @@ object ModuleArmor {
     }
 
     class ModuleArmorItem: ArmorItem(ModulesArmorMaterial(), EquipmentSlot.CHEST, itemSettings()), SimpleBatteryItem {
+        init {
+            val inventory = NbtList()
+            this.defaultStack.orCreateNbt.put("inventory", inventory)
+        }
+
         override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
 
         }
