@@ -130,13 +130,15 @@ object TheMachineBlockU {
                     .recipeManager
                     .getFirstMatch(TheMachineRecipe.Type, inventory, world)
 
-                val recipe = optional.get()
-                if (inventory.getStack(0) != null && inventory.getStack(1) != null && (inventory.getStack(2) == null || inventory.getStack(2) == recipe.output)) {
-                    if (inventory.getStack(2) == null) {
-                        inventory.setStack(2, recipe.output)
-                    } else if (inventory.getStack(2).item == recipe.output.item) {
-                        val count = inventory.getStack(2).count + recipe.output.count
-                        inventory.setStack(2, ItemStack(recipe.output.item, count))
+                if (optional.get() != null) {
+                    val recipe = optional.get()
+                    if (inventory.getStack(0) != null && inventory.getStack(1) != null && (inventory.getStack(2) == null || inventory.getStack(2) == recipe.output)) {
+                        if (inventory.getStack(2) == null) {
+                            inventory.setStack(2, recipe.output)
+                        } else if (inventory.getStack(2).item == recipe.output.item) {
+                            val count = inventory.getStack(2).count + recipe.output.count
+                            inventory.setStack(2, ItemStack(recipe.output.item, count))
+                        }
                     }
                 }
             }
