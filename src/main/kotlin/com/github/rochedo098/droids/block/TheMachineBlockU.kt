@@ -126,11 +126,11 @@ object TheMachineBlockU {
             var inventory: Inventory = SimpleInventory(9)
 
             fun tick(world: World, pos: BlockPos, state: BlockState, ue: UEntity) {
-                val optional: Optional<TheMachineRecipe> = world.server!!
+                val optional = world.server!!
                     .recipeManager
                     .getFirstMatch(TheMachineRecipe.Type, inventory, world)
 
-                if (optional.get() != null) {
+                if (!optional.isEmpty) {
                     val recipe = optional.get()
                     if (inventory.getStack(0) != null && inventory.getStack(1) != null && (inventory.getStack(2) == null || inventory.getStack(2) == recipe.output)) {
                         if (inventory.getStack(2) == null) {
