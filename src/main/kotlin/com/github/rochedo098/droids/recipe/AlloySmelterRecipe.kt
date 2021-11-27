@@ -13,16 +13,15 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
-class TheMachineRecipe(
+class AlloySmelterRecipe(
     val identifier: Identifier,
     val inputA: Ingredient,
     val inputB: Ingredient,
-    val inputC: Ingredient,
     val result: ItemStack
 ): Recipe<Inventory> {
     override fun matches(inventory: Inventory, world: World?): Boolean {
         if (inventory.size() < 2) return false
-        return this.inputA.test(inventory.getStack(0)) && inputB.test(inventory.getStack(1)) && inputC.test(inventory.getStack(2))
+        return this.inputA.test(inventory.getStack(0)) && inputB.test(inventory.getStack(1))
     }
 
     override fun craft(inventory: Inventory?): ItemStack {
@@ -52,43 +51,39 @@ class TheMachineRecipe(
     class JsonFormat (
         val inputA: JsonObject,
         val inputB: JsonObject,
-        val inputC: JsonObject,
         val outputItem: String,
         val outputAmount: Int
     )
 
-    object Type: RecipeType<TheMachineRecipe> {
-        val ID: String = "the_machine"
+    object Type: RecipeType<AlloySmelterRecipe> {
+        val ID: String = "alloy_smelter"
     }
 
-    object Serializer: RecipeSerializer<TheMachineRecipe> {
-        override fun read(id: Identifier, json: JsonObject): TheMachineRecipe {
+    object Serializer: RecipeSerializer<AlloySmelterRecipe> {
+        override fun read(id: Identifier, json: JsonObject): AlloySmelterRecipe {
             val recipe = Gson().fromJson(json, JsonFormat::class.java)
 
             val inputA = Ingredient.fromJson(recipe.inputA)
             val inputB = Ingredient.fromJson(recipe.inputB)
-            val inputC = Ingredient.fromJson(recipe.inputC)
             val outputItem = Registry.ITEM.getOrEmpty(Identifier(recipe.outputItem)).get()
             val output = ItemStack(outputItem, recipe.outputAmount)
 
-            return TheMachineRecipe(id, inputA, inputB, inputC, output)
+            return AlloySmelterRecipe(id, inputA, inputB, output)
         }
 
-        override fun write(buf: PacketByteBuf, recipe: TheMachineRecipe) {
+        override fun write(buf: PacketByteBuf, recipe: AlloySmelterRecipe) {
             recipe.inputA.write(buf)
             recipe.inputB.write(buf)
-            recipe.inputC.write(buf)
             buf.writeItemStack(recipe.output)
         }
 
-        override fun read(id: Identifier, buf: PacketByteBuf): TheMachineRecipe {
+        override fun read(id: Identifier, buf: PacketByteBuf): AlloySmelterRecipe {
             val inputA = Ingredient.fromPacket(buf)
             val inputB = Ingredient.fromPacket(buf)
-            val inputC = Ingredient.fromPacket(buf)
             val output = buf.readItemStack()
-            return TheMachineRecipe(id, inputA, inputB, inputC, output)
+            return AlloySmelterRecipe(id, inputA, inputB, output)
         }
 
-        val ID: String = "the_machine_recipe"
+        val ID: String = "alloy_smelter_recipe"
     }
 }

@@ -15,7 +15,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 
-object TheMachineBlockD {
+object TheMachineD {
     class DBlock(settings: Settings): BlockWithEntity(settings) {
         init {
             defaultState = this.stateManager.defaultState.with(Properties.HORIZONTAL_FACING, Direction.NORTH)

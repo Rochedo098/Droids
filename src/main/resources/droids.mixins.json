@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "common.AccessorRecipeManager"
+    "common.AccessorRecipeManager",
+    "common.MixinPlayerEntity"
   ],
   "injectors": {
     "defaultRequire": 1

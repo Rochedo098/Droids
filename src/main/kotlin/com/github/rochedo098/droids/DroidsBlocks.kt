@@ -2,8 +2,9 @@ package com.github.rochedo098.droids
 
 import com.github.rochedo098.droids.Droids.myIdentifier
 import com.github.rochedo098.droids.DroidsItems.itemSettings
-import com.github.rochedo098.droids.block.TheMachineBlockD
-import com.github.rochedo098.droids.block.TheMachineBlockU
+import com.github.rochedo098.droids.block.AlloySmelter
+import com.github.rochedo098.droids.block.TheMachineD
+import com.github.rochedo098.droids.block.TheMachineU
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
@@ -14,8 +15,9 @@ import net.minecraft.item.Item
 import net.minecraft.util.registry.Registry
 
 object DroidsBlocks {
-    val THE_MACHINE_U: Block = TheMachineBlockU.UBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK))
-    val THE_MACHINE_D: Block = TheMachineBlockD.DBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK))
+    val THE_MACHINE_U: Block = TheMachineU.UBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK))
+    val THE_MACHINE_D: Block = TheMachineD.DBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK))
+    val ALLOY_SMELTER: Block = AlloySmelter.ASBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK))
 
     var TIN_ORE: Block? = null
     var LEAD_ORE: Block? = null
@@ -42,6 +44,7 @@ object DroidsBlocks {
     fun register() {
         block("the_machine_u", THE_MACHINE_U, itemSettings())
         block("the_machine_d", THE_MACHINE_D, itemSettings())
+        block("alloy_smelter", ALLOY_SMELTER, itemSettings())
 
         TIN_ORE = block("tin_ore", Material.STONE, 3.0F, 3.0F, itemSettings())
         LEAD_ORE = block("lead_ore", Material.STONE, 3.0F, 3.0F, itemSettings())

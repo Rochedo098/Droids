@@ -1,7 +1,7 @@
 package com.github.rochedo098.droids.screen
 
 import com.github.rochedo098.droids.Droids
-import com.github.rochedo098.droids.block.TheMachineU
+import com.github.rochedo098.droids.block.AlloySmelter
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
@@ -9,8 +9,8 @@ import net.minecraft.item.ItemStack
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.slot.Slot
 
-class TheMachineUScreenHandler(syncId: Int, playerInventory: PlayerInventory): ScreenHandler(Droids.THE_MACHINE_SCREEN_HANDLER, syncId) {
-    var inventory: Inventory = TheMachineU.UEntity.inventory
+class AlloySmelterScreenHandler(syncId: Int, playerInventory: PlayerInventory): ScreenHandler(Droids.ALLOY_SMELTER_SCREEN_HANDLER, syncId) {
+    var inventory: Inventory = AlloySmelter.ASEntity.inventory
 
     override fun canUse(player: PlayerEntity): Boolean {
         return inventory.canPlayerUse(player)

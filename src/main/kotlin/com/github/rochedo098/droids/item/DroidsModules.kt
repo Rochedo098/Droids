@@ -92,4 +92,21 @@ object DroidsModules {
         override fun getEnergyMaxInput(): Long = 10
         override fun getEnergyMaxOutput(): Long = 0
     }
+
+    /*
+    TODO: Not yet implemented
+    class NoDeathModule(settings: Settings): Modification(settings.rarity(Rarity.EPIC), 1, false, ModificationType.MODULE), SimpleBatteryItem {
+        override fun affectedEntity(entity: LivingEntity?) {
+
+        }
+
+        override fun onApplyRun(entity: LivingEntity) {
+            this.affectedEntity(entity)
+        }
+
+        override fun getEnergyCapacity(): Long = 100
+        override fun getEnergyMaxInput(): Long = 10
+        override fun getEnergyMaxOutput(): Long = 0
+    }
+    */
 }

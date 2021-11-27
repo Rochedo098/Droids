@@ -46,8 +46,13 @@ object DroidsItems {
         module("resistance_module", DroidsModules.ResistanceModule(itemSettings()))
         module("speed_module", DroidsModules.SpeedModule(itemSettings()))
 
-        item("empty_syringe", SyringeItem.Empty(itemSettings()))
-        item("full_syringe", SyringeItem.Full(itemSettings()))
+        item("basic_empty_syringe", SyringeItem.BasicSyringe.Empty(itemSettings()))
+        item("basic_full_syringe", SyringeItem.BasicSyringe.Full(itemSettings()))
+        item("advanced_empty_syringe", SyringeItem.AdvancedSyringe.Empty(itemSettings()))
+        item("advanced_full_syringe", SyringeItem.AdvancedSyringe.Full(itemSettings()))
+        item("final_empty_syringe", SyringeItem.FinalSyringe.Full(itemSettings()))
+        item("final_full_syringe", SyringeItem.FinalSyringe.Empty(itemSettings()))
+        item("creative_syringe", SyringeItem.CreativeSyringe.Full(itemSettings()))
 
         item("module_armor", ModuleArmor.ModuleArmorItem())
     }
