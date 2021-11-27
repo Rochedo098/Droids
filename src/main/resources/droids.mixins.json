@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.github.rochedo098.droids.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+  ],
+  "client": [
+    "common.AccessorRecipeManager"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

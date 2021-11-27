@@ -5,6 +5,7 @@ import com.github.rochedo098.droids.DroidsBlocks
 import com.github.rochedo098.droids.recipe.TheMachineRecipe
 import com.github.rochedo098.droids.screen.TheMachineUScreenHandler
 import com.github.rochedo098.droids.utils.ImplementedInventory
+import com.github.rochedo098.droids.utils.getAllOfType
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
@@ -65,8 +66,10 @@ object TheMachineBlockU {
                     }
                 }
                 return ActionResult.SUCCESS
+            } else {
+                player.sendMessage(TranslatableText("block.droids.the_machine_u.use_text"), true)
+                return ActionResult.FAIL
             }
-            return ActionResult.FAIL
         }
 
         override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
@@ -126,18 +129,16 @@ object TheMachineBlockU {
             var inventory: Inventory = SimpleInventory(9)
 
             fun tick(world: World, pos: BlockPos, state: BlockState, ue: UEntity) {
-                val optional = world.server!!
-                    .recipeManager
-                    .getFirstMatch(TheMachineRecipe.Type, inventory, world)
-
-                if (!optional.isEmpty) {
-                    val recipe = optional.get()
-                    if (inventory.getStack(0) != null && inventory.getStack(1) != null && (inventory.getStack(2) == null || inventory.getStack(2) == recipe.output)) {
-                        if (inventory.getStack(2) == null) {
+                for (recipe in world.recipeManager.getAllOfType(TheMachineRecipe.Type).values) {
+                    if (!inventory.getStack(0).isEmpty && !inventory.getStack(1).isEmpty) {
+                        if (!inventory.getStack(2).isEmpty) {
+                            inventory.getStack(0).decrement(inventory.getStack(0).count)
+                            inventory.getStack(1).decrement(inventory.getStack(1).count)
                             inventory.setStack(2, recipe.output)
                         } else if (inventory.getStack(2).item == recipe.output.item) {
-                            val count = inventory.getStack(2).count + recipe.output.count
-                            inventory.setStack(2, ItemStack(recipe.output.item, count))
+                            inventory.getStack(0).decrement(inventory.getStack(0).count)
+                            inventory.getStack(1).decrement(inventory.getStack(1).count)
+                            inventory.getStack(2).increment(recipe.output.count)
                         }
                     }
                 }
