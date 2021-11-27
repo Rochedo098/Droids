@@ -2,6 +2,7 @@ package com.github.rochedo098.droids.screen
 
 import com.github.rochedo098.droids.Droids
 import com.github.rochedo098.droids.block.TheMachineU
+import com.github.rochedo098.droids.block.TheMachineU.UEntity.Companion.inventory
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
@@ -10,10 +11,8 @@ import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.slot.Slot
 
 class TheMachineUScreenHandler(syncId: Int, playerInventory: PlayerInventory): ScreenHandler(Droids.THE_MACHINE_SCREEN_HANDLER, syncId) {
-    var inventory: Inventory = TheMachineU.UEntity.inventory
-
     override fun canUse(player: PlayerEntity): Boolean {
-        return inventory.canPlayerUse(player)
+        return inventory!!.canPlayerUse(player)
     }
 
     override fun transferSlot(player: PlayerEntity, invSlot: Int): ItemStack {
@@ -22,11 +21,11 @@ class TheMachineUScreenHandler(syncId: Int, playerInventory: PlayerInventory): S
         if (slot != null && slot.hasStack()) {
             val originalStack: ItemStack = slot.getStack()
             newStack = originalStack.copy()
-            if (invSlot < inventory.size()) {
-                if (!insertItem(originalStack, inventory.size(), slots.size, true)) {
+            if (invSlot < inventory!!.size()) {
+                if (!insertItem(originalStack, inventory!!.size(), slots.size, true)) {
                     return ItemStack.EMPTY
                 }
-            } else if (!insertItem(originalStack, 0, inventory.size(), false)) {
+            } else if (!insertItem(originalStack, 0, inventory!!.size(), false)) {
                 return ItemStack.EMPTY
             }
             if (originalStack.isEmpty) {
@@ -40,8 +39,8 @@ class TheMachineUScreenHandler(syncId: Int, playerInventory: PlayerInventory): S
 
     init {
         checkSize(inventory, 9)
-        this.inventory = inventory
-        inventory.onOpen(playerInventory.player)
+        inventory = inventory
+        inventory!!.onOpen(playerInventory.player)
 
         var m: Int
         var l: Int

@@ -1,6 +1,7 @@
 package com.github.rochedo098.droids.screen
 
 import com.github.rochedo098.droids.Droids
+import com.github.rochedo098.droids.block.AlloySmelter.ASEntity.Companion.inventory
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
@@ -10,8 +11,6 @@ import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.slot.Slot
 
 class AlloySmelterScreenHandler(syncId: Int, playerInventory: PlayerInventory): ScreenHandler(Droids.ALLOY_SMELTER_SCREEN_HANDLER, syncId) {
-    private var inventory: Inventory? = SimpleInventory(9)
-
     override fun canUse(player: PlayerEntity): Boolean {
         return inventory!!.canPlayerUse(player)
     }
@@ -40,7 +39,7 @@ class AlloySmelterScreenHandler(syncId: Int, playerInventory: PlayerInventory): 
 
     init {
         checkSize(inventory, 9)
-        this.inventory = inventory
+        inventory = inventory
         inventory!!.onOpen(playerInventory.player)
 
         var m: Int

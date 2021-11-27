@@ -97,47 +97,43 @@ object TheMachineU {
     class UEntity(pos: BlockPos, state: BlockState):
         BlockEntity(Droids.THE_MACHINE_ENTITY_UP, pos, state), ExtendedScreenHandlerFactory, ImplementedInventory {
 
-        private var items: DefaultedList<ItemStack> = DefaultedList.ofSize(INVENTORY_SIZE, ItemStack.EMPTY)
-        override fun getItems(): DefaultedList<ItemStack> {
-            return items
-        }
+        private var inventory: DefaultedList<ItemStack> = DefaultedList.ofSize(INVENTORY_SIZE, ItemStack.EMPTY)
+        override fun getItems(): DefaultedList<ItemStack> = inventory
 
         override fun createMenu(syncId: Int, inv: PlayerInventory, player: PlayerEntity?): ScreenHandler = TheMachineUScreenHandler(syncId, inv)
 
         override fun readNbt(nbt: NbtCompound) {
             super.readNbt(nbt)
-            Inventories.readNbt(nbt, this.items)
+            Inventories.readNbt(nbt, this.inventory)
         }
 
         override fun writeNbt(nbt: NbtCompound): NbtCompound {
             super.writeNbt(nbt)
-            Inventories.writeNbt(nbt, this.items)
+            Inventories.writeNbt(nbt, this.inventory)
             return nbt
         }
 
         override fun getDisplayName(): Text = TranslatableText(cachedState.block.translationKey)
 
-        override fun writeScreenOpeningData(serverPlayerEntity: ServerPlayerEntity, packetByteBuf: PacketByteBuf) {
-
-        }
+        override fun writeScreenOpeningData(serverPlayerEntity: ServerPlayerEntity, packetByteBuf: PacketByteBuf) {}
 
         override fun markDirty() = super<ImplementedInventory>.markDirty()
 
         companion object {
             const val INVENTORY_SIZE = 9
-            var inventory: Inventory = SimpleInventory(9)
+            var inventory: Inventory? = SimpleInventory(9)
 
             fun tick(world: World, pos: BlockPos, state: BlockState, ue: UEntity) {
                 for (recipe in world.recipeManager.getAllOfType(TheMachineRecipe.Type).values) {
-                    if (!inventory.getStack(0).isEmpty && !inventory.getStack(1).isEmpty) {
-                        if (!inventory.getStack(2).isEmpty) {
-                            inventory.getStack(0).decrement(inventory.getStack(0).count)
-                            inventory.getStack(1).decrement(inventory.getStack(1).count)
-                            inventory.setStack(2, recipe.output)
-                        } else if (inventory.getStack(2).item == recipe.output.item) {
-                            inventory.getStack(0).decrement(inventory.getStack(0).count)
-                            inventory.getStack(1).decrement(inventory.getStack(1).count)
-                            inventory.getStack(2).increment(recipe.output.count)
+                    if (!inventory!!.getStack(0).isEmpty && !inventory!!.getStack(1).isEmpty) {
+                        if (!inventory!!.getStack(2).isEmpty) {
+                            inventory!!.getStack(0).decrement(inventory!!.getStack(0).count)
+                            inventory!!.getStack(1).decrement(inventory!!.getStack(1).count)
+                            inventory!!.setStack(2, recipe.output)
+                        } else if (inventory!!.getStack(2).item == recipe.output.item) {
+                            inventory!!.getStack(0).decrement(inventory!!.getStack(0).count)
+                            inventory!!.getStack(1).decrement(inventory!!.getStack(1).count)
+                            inventory!!.getStack(2).increment(recipe.output.count)
                         }
                     }
                 }

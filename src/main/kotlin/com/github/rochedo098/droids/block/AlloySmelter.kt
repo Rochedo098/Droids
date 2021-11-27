@@ -1,9 +1,12 @@
 package com.github.rochedo098.droids.block
 
 import com.github.rochedo098.droids.Droids
+import com.github.rochedo098.droids.recipe.AlloySmelterRecipe
+import com.github.rochedo098.droids.recipe.TheMachineRecipe
 import com.github.rochedo098.droids.screen.AlloySmelterScreen
 import com.github.rochedo098.droids.screen.AlloySmelterScreenHandler
 import com.github.rochedo098.droids.utils.ImplementedInventory
+import com.github.rochedo098.droids.utils.getAllOfType
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
@@ -128,10 +131,22 @@ object AlloySmelter {
 
         companion object {
             val INVENTORY_SIZE = 9
-            var inventory: Inventory = SimpleInventory(9)
+            var inventory: Inventory? = SimpleInventory(9)
 
             fun tick(world: World, pos: BlockPos, state: BlockState, ue: ASEntity) {
-                TODO("Not yet implemented")
+                for (recipe in world.recipeManager.getAllOfType(AlloySmelterRecipe.Type).values) {
+                    if (!inventory!!.getStack(0).isEmpty && !inventory!!.getStack(1).isEmpty) {
+                        if (!inventory!!.getStack(2).isEmpty) {
+                            inventory!!.getStack(0).decrement(inventory!!.getStack(0).count)
+                            inventory!!.getStack(1).decrement(inventory!!.getStack(1).count)
+                            inventory!!.setStack(2, recipe.output)
+                        } else if (inventory!!.getStack(2).item == recipe.output.item) {
+                            inventory!!.getStack(0).decrement(inventory!!.getStack(0).count)
+                            inventory!!.getStack(1).decrement(inventory!!.getStack(1).count)
+                            inventory!!.getStack(2).increment(recipe.output.count)
+                        }
+                    }
+                }
             }
         }
     }
