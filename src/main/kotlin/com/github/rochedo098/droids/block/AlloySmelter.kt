@@ -1,6 +1,8 @@
 package com.github.rochedo098.droids.block
 
 import com.github.rochedo098.droids.Droids
+import com.github.rochedo098.droids.screen.AlloySmelterScreen
+import com.github.rochedo098.droids.screen.AlloySmelterScreenHandler
 import com.github.rochedo098.droids.utils.ImplementedInventory
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.block.*
@@ -9,10 +11,12 @@ import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.inventory.Inventories
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.server.network.ServerPlayerEntity
@@ -22,11 +26,13 @@ import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
+import net.minecraft.util.ItemScatterer
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
+
 
 object AlloySmelter {
     class ASBlock(settings: Settings): BlockWithEntity(settings) {
@@ -48,6 +54,22 @@ object AlloySmelter {
 
         override fun getRenderType(state: BlockState?): BlockRenderType {
             return BlockRenderType.MODEL
+        }
+
+        override fun onStateReplaced(
+            state: BlockState,
+            world: World,
+            pos: BlockPos?,
+            newState: BlockState,
+            moved: Boolean
+        ) {
+            if (state.block !== newState.block) {
+                val blockEntity = world.getBlockEntity(pos)
+                if (blockEntity is ASEntity) {
+                    ItemScatterer.spawn(world, pos, blockEntity as ASEntity?)
+                }
+                super.onStateReplaced(state, world, pos, newState, moved)
+            }
         }
 
         override fun onUse(
@@ -83,24 +105,26 @@ object AlloySmelter {
     }
 
     class ASEntity(pos: BlockPos, state: BlockState): BlockEntity(Droids.ALLOY_SMELTER_ENTITY, pos, state), ExtendedScreenHandlerFactory, ImplementedInventory {
-        private var items: DefaultedList<ItemStack> = DefaultedList.ofSize(INVENTORY_SIZE, ItemStack.EMPTY)
-        override fun getItems(): DefaultedList<ItemStack> {
-            return items
-        }
+        private var inventory: DefaultedList<ItemStack> = DefaultedList.ofSize(INVENTORY_SIZE, ItemStack.EMPTY)
+        override fun getItems(): DefaultedList<ItemStack> = inventory
 
-        override fun createMenu(syncId: Int, inv: PlayerInventory?, player: PlayerEntity?): ScreenHandler? {
-            TODO("Not yet implemented")
-        }
-
+        override fun createMenu(syncId: Int, inv: PlayerInventory, player: PlayerEntity): ScreenHandler = AlloySmelterScreenHandler(syncId, inv)
         override fun getDisplayName(): Text = TranslatableText(cachedState.block.translationKey)
 
-        override fun writeScreenOpeningData(serverPlayerEntity: ServerPlayerEntity, packetByteBuf: PacketByteBuf) {
+        override fun writeScreenOpeningData(serverPlayerEntity: ServerPlayerEntity, packetByteBuf: PacketByteBuf) {}
 
+        override fun readNbt(nbt: NbtCompound) {
+            super.readNbt(nbt)
+            Inventories.readNbt(nbt, this.inventory)
         }
 
-        override fun markDirty() {
-            super<ImplementedInventory>.markDirty()
+        override fun writeNbt(nbt: NbtCompound): NbtCompound {
+            super.writeNbt(nbt)
+            Inventories.writeNbt(nbt, this.inventory)
+            return nbt
         }
+
+        override fun markDirty() = super<ImplementedInventory>.markDirty()
 
         companion object {
             val INVENTORY_SIZE = 9
