@@ -2,9 +2,11 @@ package com.github.rochedo098.droidsapi.api.events;
 
 import com.github.rochedo098.droidsapi.api.registry.RegistryBase;
 import net.minecraft.entity.LivingEntity;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.List;
 
+@ApiStatus.Experimental
 public class EventHandler {
     /**
      * This method is for internal use, but nothing prevents you from using it.

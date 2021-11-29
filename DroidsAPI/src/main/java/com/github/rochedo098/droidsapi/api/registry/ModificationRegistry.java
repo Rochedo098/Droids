@@ -18,7 +18,7 @@ public class ModificationRegistry {
     /**
      * A method for register your Module/Member/Organ
      * @param type A type of your item
-     * @param identifier A Identifier for your item
+     * @param identifier Identifier for your item
      * @param entry The class of your item
      */
     public static <V, T extends V> void register(RegistryTypes type, Identifier identifier, T entry) {
@@ -34,22 +34,22 @@ public class ModificationRegistry {
     @ApiStatus.Internal
     public void registerAll() {
         if (!registryModules.isEmpty()) {
-            for (RegistryBase registry : registryModules) {
+            registryModules.forEach(registry -> {
                 Registry.register(Registry.ITEM, registry.identifier, registry.entryAsItem);
                 new EventHandler().settingEvent(Events.onRegistry, registryModules, null);
-            }
+            });
         }
         if (!registryMembers.isEmpty()) {
-            for (RegistryBase registry : registryMembers) {
+            registryMembers.forEach(registry -> {
                 Registry.register(Registry.ITEM, registry.identifier, registry.entryAsItem);
                 new EventHandler().settingEvent(Events.onRegistry, registryMembers, null);
-            }
+            });
         }
         if (!registryOrgans.isEmpty()) {
-            for (RegistryBase registry : registryOrgans) {
+            registryOrgans.forEach(registry -> {
                 Registry.register(Registry.ITEM, registry.identifier, registry.entryAsItem);
                 new EventHandler().settingEvent(Events.onRegistry, registryOrgans, null);
-            }
+            });
         }
     }
 }

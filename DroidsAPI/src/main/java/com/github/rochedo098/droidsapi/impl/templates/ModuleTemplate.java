@@ -18,8 +18,15 @@ public class ModuleTemplate extends Modification {
         entity.kill();
     }
 
+    /**
+     * It is not necessary to work
+     */
     @Override
-    public void onApplyRun(LivingEntity entity) {
-        this.affectedEntity(entity);
-    }
+    public void onApplyRun(LivingEntity entity) {}
+
+    /**
+     * It is not necessary to work
+     */
+    @Override
+    public void onRemoveRun(LivingEntity entity) {}
 }

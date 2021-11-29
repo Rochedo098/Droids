@@ -1,9 +1,12 @@
 package com.github.rochedo098.droidsapi.api.events;
 
+import org.jetbrains.annotations.ApiStatus;
+
 /**
  * This enum class is for define the types of Events, a probably temporary class
  * Possibly deleted on future release
  */
+@ApiStatus.Experimental
 public enum Events {
     onAdd("onAdd"),
     onRemove("onRemove"),

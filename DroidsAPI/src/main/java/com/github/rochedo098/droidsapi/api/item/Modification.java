@@ -14,6 +14,7 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -30,12 +31,18 @@ public abstract class Modification extends Item {
     }
 
     /**
+     * For now, edit this with Mixin, Sorry
+     */
+    public boolean showTooltip = true;
+
+    /**
      * Max count of Modification applied on Player
      */
     protected int maxCountOnPlayer;
 
     /**
      * Defines if Modifications apply on any entity
+     * The recommended value is false
      */
     protected boolean applyOnAnyEntity;
 
@@ -84,21 +91,24 @@ public abstract class Modification extends Item {
 
     /**
      * The method for add the modification of the player
-     * @param player Parameter of the player to event handler
+     * @param entity Parameter of the player to event handler
+     * Function for internal use*
      */
-    public void applyModification(LivingEntity player) {
-        new EventHandler().settingEvent(Events.onAdd, player, null);
-        onApplyRun(player);
+    public void applyModification(LivingEntity entity) {
+        new EventHandler().settingEvent(Events.onAdd, entity, null);
+        onApplyRun(entity);
         this.applied = true;
         this.writeNbt();
     }
 
     /**
      * The method for remove the modification of the player
-     * @param player Parameter of the player to event handler
+     * @param entity Parameter of the player to event handler
+     * Function for internal use*
      */
-    public void removeModification(LivingEntity player) {
-        new EventHandler().settingEvent(Events.onRemove, player, null);
+    public void removeModification(LivingEntity entity) {
+        new EventHandler().settingEvent(Events.onRemove, entity, null);
+        onRemoveRun(entity);
         this.applied = false;
         this.writeNbt();
     }
@@ -113,14 +123,24 @@ public abstract class Modification extends Item {
      * In this method you write what will happen when the module is applied
      * @param entity The Living Entity output for make the code
      */
+    @ApiStatus.Experimental
     public abstract void onApplyRun(LivingEntity entity);
+
+    /**
+     * In this method you write what will happen when the module is removed
+     * @param entity The Living Entity output for make the code
+     */
+    @ApiStatus.Experimental
+    public abstract void onRemoveRun(LivingEntity entity);
 
     @Override
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(new LiteralText("Modification Type: " + this.type).formatted(Formatting.BOLD));
-        tooltip.add(new LiteralText("Max Count on Player: " + this.maxCountOnPlayer).formatted(Formatting.BOLD));
-        tooltip.add(new LiteralText("Apply on Any Entity: " + this.applyOnAnyEntity).formatted(Formatting.BOLD));
+        if (this.showTooltip) {
+            tooltip.add(new LiteralText("Modification Type: " + this.type).formatted(Formatting.BOLD));
+            tooltip.add(new LiteralText("Max Count on Player: " + this.maxCountOnPlayer).formatted(Formatting.BOLD));
+            tooltip.add(new LiteralText("Apply on Any Entity: " + this.applyOnAnyEntity).formatted(Formatting.BOLD));
+        }
     }
 
     @Override
