@@ -37,11 +37,6 @@ allprojects {
         }
 
         maven {
-            name = "CottonMC"
-            url = "https://server.bbkr.space/artifactory/libs-release"
-        }
-
-        maven {
             name "Siphalor's Maven"
             url "https://maven.siphalor.de"
         }
@@ -51,14 +46,6 @@ allprojects {
             url = "https://maven.modmuss50.me/"
             content {
                 includeGroup "teamreborn"
-            }
-        }
-
-        maven {
-            name = "Technici4n"
-            url = "https://raw.githubusercontent.com/Technici4n/Technici4n-maven/master/"
-            content {
-                includeGroup "dev.latvian.mods"
             }
         }
 
@@ -73,9 +60,6 @@ allprojects {
         maven {
             name = "SheDaniel"
             url "https://maven.shedaniel.me"
-            content {
-                includeGroup "dev.architectury"
-            }
         }
     }
 

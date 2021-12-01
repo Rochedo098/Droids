@@ -39,7 +39,7 @@ object  Droids : ModInitializer {
     override fun onInitialize() {
         DroidsBlocks.register()
         DroidsItems.register()
-        WorldGeneration.register()
+        //WorldGeneration.register()
 
         THE_MACHINE_ENTITY_UP = FabricBlockEntityTypeBuilder.create(::UEntity, DroidsBlocks.THE_MACHINE_U).build(null)
         Registry.register(Registry.BLOCK_ENTITY_TYPE, myIdentifier("the_machine_up"), THE_MACHINE_ENTITY_UP)

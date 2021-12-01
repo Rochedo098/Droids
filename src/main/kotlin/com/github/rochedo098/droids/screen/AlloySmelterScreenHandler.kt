@@ -4,8 +4,6 @@ import com.github.rochedo098.droids.Droids
 import com.github.rochedo098.droids.block.AlloySmelter.ASEntity.Companion.inventory
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.inventory.Inventory
-import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.slot.Slot

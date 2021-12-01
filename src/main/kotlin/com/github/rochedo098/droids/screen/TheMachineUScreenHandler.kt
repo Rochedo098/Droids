@@ -1,11 +1,9 @@
 package com.github.rochedo098.droids.screen
 
 import com.github.rochedo098.droids.Droids
-import com.github.rochedo098.droids.block.TheMachineU
 import com.github.rochedo098.droids.block.TheMachineU.UEntity.Companion.inventory
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.slot.Slot

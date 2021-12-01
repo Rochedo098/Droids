@@ -83,7 +83,7 @@ object TheMachineU {
             world: World,
             state: BlockState,
             type: BlockEntityType<T>
-        ): BlockEntityTicker<T>? {
+        ): BlockEntityTicker<T> {
             return BlockEntityTicker { world, pos, state, blockEntity ->
                 UEntity.tick(world, pos, state, blockEntity as? UEntity ?: return@BlockEntityTicker)
             }
@@ -107,10 +107,9 @@ object TheMachineU {
             Inventories.readNbt(nbt, this.inventory)
         }
 
-        override fun writeNbt(nbt: NbtCompound): NbtCompound {
+        override fun writeNbt(nbt: NbtCompound) {
             super.writeNbt(nbt)
             Inventories.writeNbt(nbt, this.inventory)
-            return nbt
         }
 
         override fun getDisplayName(): Text = TranslatableText(cachedState.block.translationKey)

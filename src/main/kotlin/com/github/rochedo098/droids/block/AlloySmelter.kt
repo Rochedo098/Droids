@@ -2,16 +2,14 @@ package com.github.rochedo098.droids.block
 
 import com.github.rochedo098.droids.Droids
 import com.github.rochedo098.droids.recipe.AlloySmelterRecipe
-import com.github.rochedo098.droids.recipe.TheMachineRecipe
-import com.github.rochedo098.droids.screen.AlloySmelterScreen
 import com.github.rochedo098.droids.screen.AlloySmelterScreenHandler
-import com.github.rochedo098.droids.utils.ImplementedInventory
 import com.github.rochedo098.droids.utils.getAllOfType
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.block.entity.LootableContainerBlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventories
@@ -107,30 +105,37 @@ object AlloySmelter {
         }
     }
 
-    class ASEntity(pos: BlockPos, state: BlockState): BlockEntity(Droids.ALLOY_SMELTER_ENTITY, pos, state), ExtendedScreenHandlerFactory, ImplementedInventory {
-        private var inventory: DefaultedList<ItemStack> = DefaultedList.ofSize(INVENTORY_SIZE, ItemStack.EMPTY)
-        override fun getItems(): DefaultedList<ItemStack> = inventory
+    class ASEntity(pos: BlockPos, state: BlockState): ExtendedScreenHandlerFactory, LootableContainerBlockEntity(Droids.ALLOY_SMELTER_ENTITY, pos, state) {
+        private var inventory: DefaultedList<ItemStack> = DefaultedList.ofSize(size(), ItemStack.EMPTY)
 
         override fun createMenu(syncId: Int, inv: PlayerInventory, player: PlayerEntity): ScreenHandler = AlloySmelterScreenHandler(syncId, inv)
+
         override fun getDisplayName(): Text = TranslatableText(cachedState.block.translationKey)
 
+        override fun getContainerName(): Text  = TranslatableText(cachedState.block.translationKey)
+
+        override fun createScreenHandler(syncId: Int, playerInventory: PlayerInventory): ScreenHandler = AlloySmelterScreenHandler(syncId, playerInventory)
+
+        override fun getInvStackList(): DefaultedList<ItemStack> = this.inventory
+
+        override fun setInvStackList(list: DefaultedList<ItemStack>) { this.inventory = list }
+
+        override fun size(): Int = 9
+
         override fun writeScreenOpeningData(serverPlayerEntity: ServerPlayerEntity, packetByteBuf: PacketByteBuf) {}
+
 
         override fun readNbt(nbt: NbtCompound) {
             super.readNbt(nbt)
             Inventories.readNbt(nbt, this.inventory)
         }
 
-        override fun writeNbt(nbt: NbtCompound): NbtCompound {
+        override fun writeNbt(nbt: NbtCompound?) {
             super.writeNbt(nbt)
             Inventories.writeNbt(nbt, this.inventory)
-            return nbt
         }
 
-        override fun markDirty() = super<ImplementedInventory>.markDirty()
-
         companion object {
-            val INVENTORY_SIZE = 9
             var inventory: Inventory? = SimpleInventory(9)
 
             fun tick(world: World, pos: BlockPos, state: BlockState, ue: ASEntity) {
