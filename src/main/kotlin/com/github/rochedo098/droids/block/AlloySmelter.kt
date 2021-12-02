@@ -1,22 +1,16 @@
 package com.github.rochedo098.droids.block
 
 import com.github.rochedo098.droids.Droids
-import com.github.rochedo098.droids.recipe.AlloySmelterRecipe
-import com.github.rochedo098.droids.recipe.TheMachineRecipe
-import com.github.rochedo098.droids.screen.AlloySmelterScreen
-import com.github.rochedo098.droids.screen.AlloySmelterScreenHandler
-import com.github.rochedo098.droids.utils.ImplementedInventory
-import com.github.rochedo098.droids.utils.getAllOfType
+import com.github.rochedo098.droids.screen.SimpleScreenHandler
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.block.entity.LootableContainerBlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventories
-import net.minecraft.inventory.Inventory
-import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
@@ -89,6 +83,7 @@ object AlloySmelter {
                     player.openHandledScreen(screenHandlerFactory)
                 }
             }
+
             return ActionResult.SUCCESS
         }
 
@@ -96,7 +91,7 @@ object AlloySmelter {
             world: World?,
             state: BlockState?,
             type: BlockEntityType<T>?
-        ): BlockEntityTicker<T>? {
+        ): BlockEntityTicker<T> {
             return BlockEntityTicker { world, pos, state, blockEntity ->
                 ASEntity.tick(world, pos, state, blockEntity as? ASEntity ?: return@BlockEntityTicker)
             }
@@ -107,12 +102,22 @@ object AlloySmelter {
         }
     }
 
-    class ASEntity(pos: BlockPos, state: BlockState): BlockEntity(Droids.ALLOY_SMELTER_ENTITY, pos, state), ExtendedScreenHandlerFactory, ImplementedInventory {
-        private var inventory: DefaultedList<ItemStack> = DefaultedList.ofSize(INVENTORY_SIZE, ItemStack.EMPTY)
-        override fun getItems(): DefaultedList<ItemStack> = inventory
+    class ASEntity(pos: BlockPos, state: BlockState): LootableContainerBlockEntity(Droids.ALLOY_SMELTER_ENTITY, pos, state), ExtendedScreenHandlerFactory {
+        private var inventory: DefaultedList<ItemStack> = DefaultedList.ofSize(size(), ItemStack.EMPTY)
 
-        override fun createMenu(syncId: Int, inv: PlayerInventory, player: PlayerEntity): ScreenHandler = AlloySmelterScreenHandler(syncId, inv)
+        override fun size(): Int = 9
+
+        override fun createMenu(syncId: Int, inv: PlayerInventory, player: PlayerEntity): ScreenHandler = SimpleScreenHandler(syncId, inv)
+
         override fun getDisplayName(): Text = TranslatableText(cachedState.block.translationKey)
+
+        override fun getContainerName(): Text = TranslatableText(cachedState.block.translationKey)
+
+        override fun createScreenHandler(syncId: Int, playerInventory: PlayerInventory): ScreenHandler = SimpleScreenHandler(syncId, playerInventory)
+
+        override fun getInvStackList(): DefaultedList<ItemStack> = this.inventory
+
+        override fun setInvStackList(list: DefaultedList<ItemStack>) { this.inventory = list }
 
         override fun writeScreenOpeningData(serverPlayerEntity: ServerPlayerEntity, packetByteBuf: PacketByteBuf) {}
 
@@ -127,26 +132,9 @@ object AlloySmelter {
             return nbt
         }
 
-        override fun markDirty() = super<ImplementedInventory>.markDirty()
-
         companion object {
-            val INVENTORY_SIZE = 9
-            var inventory: Inventory? = SimpleInventory(9)
-
             fun tick(world: World, pos: BlockPos, state: BlockState, ue: ASEntity) {
-                for (recipe in world.recipeManager.getAllOfType(AlloySmelterRecipe.Type).values) {
-                    if (!inventory!!.getStack(0).isEmpty && !inventory!!.getStack(1).isEmpty) {
-                        if (!inventory!!.getStack(2).isEmpty) {
-                            inventory!!.getStack(0).decrement(inventory!!.getStack(0).count)
-                            inventory!!.getStack(1).decrement(inventory!!.getStack(1).count)
-                            inventory!!.setStack(2, recipe.output)
-                        } else if (inventory!!.getStack(2).item == recipe.output.item) {
-                            inventory!!.getStack(0).decrement(inventory!!.getStack(0).count)
-                            inventory!!.getStack(1).decrement(inventory!!.getStack(1).count)
-                            inventory!!.getStack(2).increment(recipe.output.count)
-                        }
-                    }
-                }
+
             }
         }
     }

@@ -5,7 +5,7 @@ import com.github.rochedo098.droids.block.TheMachineD.DEntity
 import com.github.rochedo098.droids.block.TheMachineU.UEntity
 import com.github.rochedo098.droids.recipe.AlloySmelterRecipe
 import com.github.rochedo098.droids.recipe.TheMachineRecipe
-import com.github.rochedo098.droids.screen.AlloySmelterScreenHandler
+import com.github.rochedo098.droids.screen.SimpleScreenHandler
 import com.github.rochedo098.droids.screen.TheMachineUScreenHandler
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
@@ -32,9 +32,9 @@ object  Droids : ModInitializer {
             TheMachineUScreenHandler(syncId, inv)
         } as ScreenHandlerType<TheMachineUScreenHandler>
 
-    val ALLOY_SMELTER_SCREEN_HANDLER: ScreenHandlerType<AlloySmelterScreenHandler> = ScreenHandlerRegistry.registerExtended(myIdentifier("alloy_smelter")) {syncId, inv, buf ->
-        AlloySmelterScreenHandler(syncId, inv)
-    } as ScreenHandlerType<AlloySmelterScreenHandler>
+    val ALLOY_SMELTER_SCREEN_HANDLER: ScreenHandlerType<SimpleScreenHandler> = ScreenHandlerRegistry.registerExtended(myIdentifier("alloy_smelter")) { syncId, inv, buf ->
+        SimpleScreenHandler(syncId, inv)
+    } as ScreenHandlerType<SimpleScreenHandler>
 
     override fun onInitialize() {
         DroidsBlocks.register()
