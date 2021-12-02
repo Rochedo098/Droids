@@ -25,10 +25,6 @@ object  Droids : ModInitializer {
     var THE_MACHINE_ENTITY_UP: BlockEntityType<UEntity>? = null
     var THE_MACHINE_ENTITY_DOWN: BlockEntityType<DEntity>? = null
 
-    val THE_MACHINE_SCREEN_HANDLER: ScreenHandlerType<TheMachineUScreenHandler> = ScreenHandlerRegistry.registerExtended(myIdentifier("the_machine")) {syncId, inv, buf ->
-            TheMachineUScreenHandler(syncId, inv)
-        } as ScreenHandlerType<TheMachineUScreenHandler>
-
     val SIMPLE_SCREEN_HANDLER: ScreenHandlerType<SimpleScreenHandler> = ScreenHandlerRegistry.registerExtended(myIdentifier("simple_handler")) {syncId, inv, buf ->
         SimpleScreenHandler(syncId, inv)
     } as ScreenHandlerType<SimpleScreenHandler>
