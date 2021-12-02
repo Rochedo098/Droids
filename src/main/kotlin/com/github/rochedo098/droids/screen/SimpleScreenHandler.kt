@@ -10,14 +10,14 @@ import net.minecraft.item.ItemStack
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.slot.Slot
 
-open class SimpleScreenHandler(syncId: Int, playerInventory: PlayerInventory): ScreenHandler(Droids.ALLOY_SMELTER_SCREEN_HANDLER, syncId) {
+open class SimpleScreenHandler(syncId: Int, playerInventory: PlayerInventory): ScreenHandler(Droids.SIMPLE_SCREEN_HANDLER, syncId) {
     private var inventory: Inventory? = null
 
     init {
-        this.inventory = SimpleInventory(9)
+        inventory = SimpleInventory(9)
 
         checkSize(inventory, 9)
-        inventory!!.onOpen(playerInventory.player)
+        this.inventory!!.onOpen(playerInventory.player)
         var i: Int
         var j: Int
         i = 0

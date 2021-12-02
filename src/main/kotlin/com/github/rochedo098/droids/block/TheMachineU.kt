@@ -2,9 +2,7 @@ package com.github.rochedo098.droids.block
 
 import com.github.rochedo098.droids.Droids
 import com.github.rochedo098.droids.DroidsBlocks
-import com.github.rochedo098.droids.recipe.TheMachineRecipe
 import com.github.rochedo098.droids.screen.TheMachineUScreenHandler
-import com.github.rochedo098.droids.utils.getAllOfType
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
@@ -14,8 +12,6 @@ import net.minecraft.block.entity.LootableContainerBlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventories
-import net.minecraft.inventory.Inventory
-import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
@@ -125,23 +121,7 @@ object TheMachineU {
         }
 
         companion object {
-            var inventory: Inventory? = SimpleInventory(9)
-
-            fun tick(world: World, pos: BlockPos, state: BlockState, ue: UEntity) {
-                for (recipe in world.recipeManager.getAllOfType(TheMachineRecipe.Type).values) {
-                    if (!inventory!!.getStack(0).isEmpty && !inventory!!.getStack(1).isEmpty) {
-                        if (!inventory!!.getStack(2).isEmpty) {
-                            inventory!!.getStack(0).decrement(inventory!!.getStack(0).count)
-                            inventory!!.getStack(1).decrement(inventory!!.getStack(1).count)
-                            inventory!!.setStack(2, recipe.output)
-                        } else if (inventory!!.getStack(2).item == recipe.output.item) {
-                            inventory!!.getStack(0).decrement(inventory!!.getStack(0).count)
-                            inventory!!.getStack(1).decrement(inventory!!.getStack(1).count)
-                            inventory!!.getStack(2).increment(recipe.output.count)
-                        }
-                    }
-                }
-            }
+            fun tick(world: World, pos: BlockPos, state: BlockState, ue: UEntity) {}
         }
     }
 }
