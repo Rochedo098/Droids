@@ -107,21 +107,24 @@ object TheMachineU {
 
         override fun writeScreenOpeningData(serverPlayerEntity: ServerPlayerEntity, packetByteBuf: PacketByteBuf) {}
 
+        override fun clear() {}
+
         override fun size(): Int = 9
 
         override fun readNbt(nbt: NbtCompound) {
-            super.readNbt(nbt)
             Inventories.readNbt(nbt, this.inventory)
+            super.readNbt(nbt)
         }
 
         override fun writeNbt(nbt: NbtCompound): NbtCompound {
-            super.writeNbt(nbt)
             Inventories.writeNbt(nbt, this.inventory)
-            return nbt
+            return super.writeNbt(nbt)
         }
 
         companion object {
-            fun tick(world: World, pos: BlockPos, state: BlockState, ue: UEntity) {}
+            fun tick(world: World, pos: BlockPos, state: BlockState, ue: UEntity) {
+
+            }
         }
     }
 }

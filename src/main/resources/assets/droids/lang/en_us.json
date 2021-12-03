@@ -38,8 +38,13 @@
   "item.droids.resistance_module": "Resistance Module",
   "item.droids.speed_module": "Speed Module",
 
-  "item.droids.empty_syringe": "Empty Syringe",
-  "item.droids.full_syringe": "Full Syringe",
+  "item.droids.basic_empty_syringe": "Basic Syringe - Empty",
+  "item.droids.basic_full_syringe": "Basic Syringe - Full",
+  "item.droids.advanced_empty_syringe": "Advanced Syringe - Empty",
+  "item.droids.advanced_full_syringe": "Advanced Syringe - Full",
+  "item.droids.final_empty_syringe": "Final Syringe - Empty",
+  "item.droids.final_full_syringe": "Final Syringe - Full",
+  "item.droids.creative_syringe": "Creative Syringe",
 
   "item.droids.module_armor": "Module Armor",
   "item.droids.module_armor.explication": "Use this armor to use modules, and use the Machine to apply modules to the armor.",

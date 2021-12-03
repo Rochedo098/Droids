@@ -86,22 +86,17 @@ allprojects {
         withSourcesJar()
     }
 
+    /*
     publishing {
         publications {
-            mavenJava(MavenPublication) {
-                artifact(remapJar) {
-                    builtBy remapJar
-                }
-                artifact(sourcesJar) {
-                    builtBy remapSourcesJar
-                }
-            }
+            from(components["java"])
         }
 
         repositories {
             mavenLocal()
         }
     }
+    */
 
     jar {
         from ("LICENSE") {

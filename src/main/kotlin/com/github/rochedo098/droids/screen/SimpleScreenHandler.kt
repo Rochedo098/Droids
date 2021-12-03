@@ -45,7 +45,7 @@ open class SimpleScreenHandler(syncId: Int, playerInventory: PlayerInventory): S
         }
     }
 
-    override fun canUse(player: PlayerEntity?): Boolean {
+    override fun canUse(player: PlayerEntity): Boolean {
         return this.inventory!!.canPlayerUse(player)
     }
 

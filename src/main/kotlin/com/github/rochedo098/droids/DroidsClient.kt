@@ -9,6 +9,6 @@ import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry
 @Environment(EnvType.CLIENT)
 object DroidsClient : ClientModInitializer {
     override fun onInitializeClient() {
-        ScreenRegistry.register(Droids.THE_MACHINE_SCREEN_HANDLER, ::TheMachineUScreen)
+        ScreenRegistry.register(Droids.SIMPLE_SCREEN_HANDLER, ::TheMachineUScreen)
     }
 }

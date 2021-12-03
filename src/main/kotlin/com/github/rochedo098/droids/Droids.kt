@@ -4,7 +4,6 @@ import com.github.rochedo098.droids.block.TheMachineD.DEntity
 import com.github.rochedo098.droids.block.TheMachineU.UEntity
 import com.github.rochedo098.droids.recipe.TheMachineRecipe
 import com.github.rochedo098.droids.screen.SimpleScreenHandler
-import com.github.rochedo098.droids.screen.TheMachineUScreenHandler
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
