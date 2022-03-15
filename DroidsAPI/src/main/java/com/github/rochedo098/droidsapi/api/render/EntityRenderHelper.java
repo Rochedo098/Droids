@@ -1,4 +1,5 @@
-package com.github.rochedo098.droidsapi.api.renderer;
+package com.github.rochedo098.droidsapi.api.render;
+
 
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import org.jetbrains.annotations.ApiStatus;
