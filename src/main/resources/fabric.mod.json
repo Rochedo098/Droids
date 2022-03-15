@@ -24,18 +24,8 @@
         "adapter": "kotlin",
         "value": "com.github.rochedo098.droids.Droids"
       }
-    ],
-    "client": [
-      {
-        "adapter": "kotlin",
-        "value": "com.github.rochedo098.droids.DroidsClient"
-      }
     ]
   },
-
-  "mixins": [
-    "droids.mixins.json"
-  ],
 
   "depends": {
     "fabricloader": ">=0.8.7",

@@ -6,5 +6,5 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-registry-sync-v0:0.7.9+f08a69e132"
     modImplementation "net.fabricmc.fabric-api:fabric-rendering-v1:1.8.0+b06cb95b18"
 
-    modCompileOnly "dev.latvian.mods:kubejs-fabric:1701.4.0-build.150"
+    modApi "dev.latvian.mods:rhino-fabric:${rootProject.rhino_version}"
 }

@@ -1,7 +1,7 @@
 plugins {
-    id "fabric-loom" version "0.10-SNAPSHOT"
+    id "fabric-loom" version '0.11-SNAPSHOT'
     id 'maven-publish'
-    id "org.jetbrains.kotlin.jvm" version "1.5.10"
+    id "org.jetbrains.kotlin.jvm" version "1.6.10"
 }
 
 archivesBaseName = "Droids"
@@ -13,9 +13,9 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
 
-    modImplementation include("de.siphalor:nbtcrafting-1.17:${project.nbtcrafting_version}")
+    modImplementation include("de.siphalor:nbtcrafting-1.18:${project.nbtcrafting_version}")
     modImplementation include("teamreborn:energy:${project.techreborn_energy}")
-    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+    //modImplementation include("dev.lazurite:lattice:${project.lattice_version}") //LibGUI
 
     api project(path: ":DroidsAPI", configuration: "namedElements")
     include project(":DroidsAPI")
@@ -32,13 +32,18 @@ allprojects {
 
     repositories {
         maven {
+            name = "Lazurite"
+            url = "https://lazurite.dev/releases"
+        }
+
+        maven {
             name = "ModMenu"
             url = "https://maven.terraformersmc.com/releases/"
         }
 
         maven {
-            name "Siphalor's Maven"
-            url "https://maven.siphalor.de"
+            name = "Siphalor's Maven"
+            url = "https://maven.siphalor.de"
         }
 
         maven {
@@ -59,7 +64,12 @@ allprojects {
 
         maven {
             name = "SheDaniel"
-            url "https://maven.shedaniel.me"
+            url = "https://maven.shedaniel.me"
+        }
+
+        maven {
+            name = "Jitpack"
+            url = "https://jitpack.io"
         }
     }
 
