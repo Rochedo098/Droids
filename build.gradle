@@ -5,20 +5,9 @@ plugins {
 }
 
 archivesBaseName = "Droids"
-version = "0.1.0"
 group = "com.github.rochedo098"
 
 repositories {
-    maven {
-        name = "Lazurite"
-        url = "https://lazurite.dev/releases"
-    }
-
-    maven {
-        name = "ModMenu"
-        url = "https://maven.terraformersmc.com/releases/"
-    }
-
     maven {
         name = "Siphalor's Maven"
         url = "https://maven.siphalor.de"
@@ -41,13 +30,8 @@ repositories {
     }
 
     maven {
-        name = "SheDaniel"
-        url = "https://maven.shedaniel.me"
-    }
-
-    maven {
-        name = "Jitpack"
-        url = "https://jitpack.io"
+        name "JitPack"
+        url "https://jitpack.io"
     }
 }
 
@@ -61,10 +45,11 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
 
-    modImplementation include("de.siphalor:nbtcrafting-1.18:${project.nbtcrafting_version}")
-    modImplementation include("teamreborn:energy:${project.techreborn_energy}")
-    modApi include("dev.latvian.mods:rhino-fabric:${rootProject.rhino_version}")
-    //modImplementation include("dev.lazurite:lattice:${project.lattice_version}") //LibGUI
+    include modImplementation("de.siphalor:nbtcrafting-1.18:${project.nbtcrafting_version}")
+    include modImplementation("teamreborn:energy:${project.techreborn_energy}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+    include modApi("dev.latvian.mods:rhino-fabric:${rootProject.rhino_version}")
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
