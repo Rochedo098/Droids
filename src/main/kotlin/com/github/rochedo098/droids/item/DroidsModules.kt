@@ -1,14 +1,14 @@
 package com.github.rochedo098.droids.item
 
-import com.github.rochedo098.droidsapi.api.item.Modification
-import com.github.rochedo098.droidsapi.api.item.ModificationType
+import com.github.rochedo098.droids.api.item.Modification
+import com.github.rochedo098.droids.api.item.ModificationType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.util.Rarity
 
 object DroidsModules {
-    class FireResistanceModule(settings:Settings): Modification(settings.maxCount(1).rarity(Rarity.UNCOMMON), ModificationType.MODULE) {
+    class FireResistanceModule(settings: Settings): Modification(settings.maxCount(1).rarity(Rarity.UNCOMMON), ModificationType.MODULE) {
         override fun affectedEntity(entity: LivingEntity) {
             entity.addStatusEffect(StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 0, 1))
         }

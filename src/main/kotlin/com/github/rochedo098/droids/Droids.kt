@@ -14,10 +14,15 @@ import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 
 object  Droids : ModInitializer {
     val GROUP: ItemGroup = FabricItemGroupBuilder.build(myIdentifier("general_group")) { ItemStack { DroidsItems.STEEL_INGOT } }
+
     fun myIdentifier(name: String): Identifier = Identifier("droids", name)
+
+    val LOGGER: Logger = LogManager.getLogger("Droids")
 
     private fun <T: BlockEntity> blockEntity(factory: FabricBlockEntityTypeBuilder.Factory<T>, block: Block, id: String): BlockEntityType<T> {
         val blockEntity = FabricBlockEntityTypeBuilder.create(factory, block).build(null)
@@ -34,7 +39,5 @@ object  Droids : ModInitializer {
     override fun onInitialize() {
         DroidsBlocks.register()
         DroidsItems.register()
-
-
     }
 }

@@ -38,9 +38,11 @@ abstract class EnergyAcceptorBlockEntity(type: BlockEntityType<*>, pos: BlockPos
         nbt.put("PowerAcceptor", data)
     }
 
+    /*
     fun tick(world: World, pos: BlockPos, state: BlockState, blockEntity: Thread) {
 
     }
+    */
 
     abstract fun canAcceptEnergy(side: Direction?): Boolean
 
