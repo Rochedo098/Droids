@@ -1,102 +1,80 @@
 package com.github.rochedo098.droids.item
 
+import com.github.rochedo098.droids.Droids
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
-import net.minecraft.util.Formatting
+import net.minecraft.text.TranslatableText
 import net.minecraft.util.Hand
-import net.minecraft.util.Identifier
 import net.minecraft.util.TypedActionResult
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
 object SyringeItem {
-    object BasicSyringe {
-        open class Empty(settings: Settings): Item(settings.maxCount(1)) {
-            override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
-                tooltip.add(LiteralText("Use this syringe for collect you blood").formatted(Formatting.BOLD))
-            }
+    abstract class SyringeBase(settings: Settings): Item(settings.maxCount(1)) {
+        abstract fun getType(): SyringeType
+        abstract fun newItem(): Item
+        abstract fun getAmount(): Float
 
-            override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
-                user.damage(DamageSource.GENERIC, 1f)
-                return TypedActionResult.consume(ItemStack(Registry.ITEM.get(Identifier("droids:basic_full_syringe"))))
-            }
+        override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
+            tooltip.add(TranslatableText("$translationKey.text"))
         }
 
-        open class Full(settings: Settings): Item(settings.maxCount(1)) {
-            override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
-                tooltip.add(LiteralText("Collected Blood of Player: Comming Soon").formatted(Formatting.BOLD))
-            }
+        override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
+            if (getType() == SyringeType.EMPTY) user.damage(DamageSource.GENERIC, getAmount())
+            else user.heal(getAmount())
+            return TypedActionResult.consume(ItemStack(newItem()))
+        }
 
-            override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
-                user.heal(1f)
-                return TypedActionResult.consume(ItemStack(Registry.ITEM.get(Identifier("droids:basic_empty_syringe"))))
-            }
+        enum class SyringeType { EMPTY, FULL }
+    }
+
+    private fun getItem(id: String): Item = Registry.ITEM.get(Droids.myIdentifier(id))
+
+    object SmallSyringe {
+        open class Empty(settings: Settings): SyringeBase(settings) {
+            override fun getType(): SyringeType = SyringeType.EMPTY
+
+            override fun newItem(): Item = getItem("small_syringe_full")
+
+            override fun getAmount(): Float = 1f
+        }
+
+        open class Full(settings: Settings): SyringeBase(settings) {
+            override fun getType(): SyringeType = SyringeType.FULL
+
+            override fun newItem(): Item = getItem("small_syringe_empty")
+
+            override fun getAmount(): Float = 1f
         }
     }
 
-    object AdvancedSyringe {
-        open class Empty(settings: Settings): Item(settings.maxCount(1)) {
-            override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
-                tooltip.add(LiteralText("Use this syringe for collect you blood").formatted(Formatting.BOLD))
-            }
+    object MediumSyringe {
+        open class Empty(settings: Settings): SyringeBase(settings) {
+            override fun getType(): SyringeType = SyringeType.EMPTY
 
-            override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
-                user.damage(DamageSource.GENERIC, 5f)
-                return TypedActionResult.consume(ItemStack(Registry.ITEM.get(Identifier("droids:advanced_full_syringe"))))
-            }
+            override fun newItem(): Item = getItem("medium_syringe_full")
+
+            override fun getAmount(): Float = 5f
         }
 
-        open class Full(settings: Settings): Item(settings.maxCount(1)) {
-            override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
-                tooltip.add(LiteralText("Collected Blood of Player: Comming Soon").formatted(Formatting.BOLD))
-            }
+        open class Full(settings: Settings): SyringeBase(settings) {
+            override fun getType(): SyringeType = SyringeType.FULL
 
-            override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
-                user.heal(5f)
-                return TypedActionResult.consume(ItemStack(Registry.ITEM.get(Identifier("droids:advanced_empty_syringe"))))
-            }
+            override fun newItem(): Item = getItem("medium_syringe_empty")
+
+            override fun getAmount(): Float = 5f
         }
     }
 
-    object FinalSyringe {
-        open class Empty(settings: Settings): Item(settings.maxCount(1)) {
-            override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
-                tooltip.add(LiteralText("Use this syringe for collect you blood").formatted(Formatting.BOLD))
-            }
+    open class CreativeSyringe(settings: Settings): SyringeBase(settings) {
+        override fun getType(): SyringeType = SyringeType.EMPTY
 
-            override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
-                user.damage(DamageSource.GENERIC, 10f)
-                return TypedActionResult.consume(ItemStack(Registry.ITEM.get(Identifier("droids:final_full_syringe"))))
-            }
-        }
+        override fun newItem(): Item = getItem("creative_syringe")
 
-        open class Full(settings: Settings): Item(settings.maxCount(1)) {
-            override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
-                tooltip.add(LiteralText("Collected Blood of Player: Comming Soon").formatted(Formatting.BOLD))
-            }
-
-            override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
-                user.heal(10f)
-                return TypedActionResult.consume(ItemStack(Registry.ITEM.get(Identifier("droids:final_empty_syringe"))))
-            }
-        }
-    }
-
-    object CreativeSyringe {
-        open class Full(settings: Settings): Item(settings.maxCount(1)) {
-            override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
-                tooltip.add(LiteralText("Collected Blood of Player: Comming Soon").formatted(Formatting.BOLD))
-            }
-
-            override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
-                user.heal(user.maxHealth)
-                return TypedActionResult.consume(ItemStack(Registry.ITEM.get(Identifier("droids:creative_syringe"))))
-            }
-        }
+        override fun getAmount(): Float = 25f
     }
 }

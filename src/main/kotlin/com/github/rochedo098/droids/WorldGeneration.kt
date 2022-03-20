@@ -1,3 +1,4 @@
+/*
 package com.github.rochedo098.droids
 
 import com.github.rochedo098.droids.Droids.myIdentifier
@@ -14,7 +15,7 @@ import net.minecraft.world.gen.feature.Feature
 import net.minecraft.world.gen.feature.OreFeatureConfig
 import net.minecraft.world.gen.heightprovider.UniformHeightProvider
 
-
+// TODO: REMAKE THIS FOR 1.18
 object WorldGeneration {
     // Tin Ore
     private val TIN_ORE: ConfiguredFeature<*, *> = Feature.ORE
@@ -187,3 +188,4 @@ object WorldGeneration {
         )
     }
 }
+*/

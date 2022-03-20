@@ -4,8 +4,6 @@ import com.github.rochedo098.droids.Droids.myIdentifier
 import com.github.rochedo098.droids.item.DroidsModules
 import com.github.rochedo098.droids.item.ModuleArmor
 import com.github.rochedo098.droids.item.SyringeItem
-import com.github.rochedo098.droidsapi.api.registry.ModificationRegistry
-import com.github.rochedo098.droidsapi.api.registry.RegistryTypes
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.item.Item
 import net.minecraft.util.registry.Registry
@@ -18,42 +16,46 @@ object DroidsItems {
     private fun item(id: String, maxCount: Int = 64) = Registry.register(Registry.ITEM, myIdentifier(id), Item(itemSettings().maxCount(maxCount)))
     private fun item(id: String, item: Item) = Registry.register(Registry.ITEM, myIdentifier(id), item)
 
-    private fun module(id: String, moduleItem: Item) = ModificationRegistry.register(RegistryTypes.MODULE, myIdentifier(id), moduleItem)
-
     fun register() {
+        // Dusts
         item("iron_dust")
         item("coal_dust")
         STEEL_INGOT = item("steel_dust")
 
         item("mortar_and_pestle", 1)
 
+        // Ingots
         item("tin_ingot")
         item("lead_ingot")
         item("silver_ingot")
         item("steel_ingot")
 
+        // Raw Ores
         item("raw_tin")
         item("raw_lead")
         item("raw_silver")
 
+        // Modules and ARMOR
+        item("module_armor", ModuleArmor.ModuleArmorItem())
+
         item("advanced_module")
         item("basic_module")
+        item("expert_module")
 
-        ModificationRegistry.register(RegistryTypes.MODULE, myIdentifier("fire_resistance_module"), DroidsModules.FireResistanceModule(itemSettings()))
-        module("health_boost_module", DroidsModules.HealthBoostModule(itemSettings()))
-        module("night_vision_module", DroidsModules.NightVisionModule(itemSettings()))
-        module("regeneration_module", DroidsModules.RegenerationModule(itemSettings()))
-        module("resistance_module", DroidsModules.ResistanceModule(itemSettings()))
-        module("speed_module", DroidsModules.SpeedModule(itemSettings()))
+        item("fire_resistance_module", DroidsModules.FireResistanceModule(itemSettings()))
+        item("health_boost_module", DroidsModules.HealthBoostModule(itemSettings()))
+        item("night_vision_module", DroidsModules.NightVisionModule(itemSettings()))
+        item("regeneration_module", DroidsModules.RegenerationModule(itemSettings()))
+        item("resistance_module", DroidsModules.ResistanceModule(itemSettings()))
+        item("speed_module", DroidsModules.SpeedModule(itemSettings()))
 
-        item("basic_empty_syringe", SyringeItem.BasicSyringe.Empty(itemSettings()))
-        item("basic_full_syringe", SyringeItem.BasicSyringe.Full(itemSettings()))
-        item("advanced_empty_syringe", SyringeItem.AdvancedSyringe.Empty(itemSettings()))
-        item("advanced_full_syringe", SyringeItem.AdvancedSyringe.Full(itemSettings()))
-        item("final_empty_syringe", SyringeItem.FinalSyringe.Full(itemSettings()))
-        item("final_full_syringe", SyringeItem.FinalSyringe.Empty(itemSettings()))
-        item("creative_syringe", SyringeItem.CreativeSyringe.Full(itemSettings()))
+        // Syringes
+        item("small_empty_syringe", SyringeItem.SmallSyringe.Empty(itemSettings()))
+        item("small_full_syringe", SyringeItem.SmallSyringe.Full(itemSettings()))
 
-        item("module_armor", ModuleArmor.ModuleArmorItem())
+        item("medium_empty_syringe", SyringeItem.MediumSyringe.Full(itemSettings()))
+        item("medium_full_syringe", SyringeItem.MediumSyringe.Empty(itemSettings()))
+
+        item("creative_syringe", SyringeItem.CreativeSyringe(itemSettings()))
     }
 }

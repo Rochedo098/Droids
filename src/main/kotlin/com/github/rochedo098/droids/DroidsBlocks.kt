@@ -2,21 +2,17 @@ package com.github.rochedo098.droids
 
 import com.github.rochedo098.droids.Droids.myIdentifier
 import com.github.rochedo098.droids.DroidsItems.itemSettings
-import com.github.rochedo098.droids.block.TheMachineD
-import com.github.rochedo098.droids.block.TheMachineU
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
-import net.minecraft.block.Blocks
 import net.minecraft.block.Material
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.util.registry.Registry
 
+@Suppress("SameParameterValue")
 object DroidsBlocks {
-    val THE_MACHINE_U: Block = TheMachineU.UBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK))
-    val THE_MACHINE_D: Block = TheMachineD.DBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK))
-
+    // BLOCKS
     var TIN_ORE: Block? = null
     var LEAD_ORE: Block? = null
     var SILVER_ORE: Block? = null
@@ -25,24 +21,22 @@ object DroidsBlocks {
     var DEEPSLATE_LEAD_ORE: Block? = null
     var DEEPSLATE_SILVER_ORE: Block? = null
 
-    private fun droidsBlockSettings(material: Material, hardness: Float, resistance: Float): AbstractBlock.Settings = FabricBlockSettings.of(material).strength(hardness, resistance)
+    private fun droidsBlockSettings(material: Material, hardness: Float, resistance: Float): AbstractBlock.Settings =
+        FabricBlockSettings.of(material).strength(hardness, resistance)
 
     private fun block(id: String, block: Block, itemSettings: Item.Settings): Block {
-        val BLOCK = Registry.register(Registry.BLOCK, myIdentifier(id), block)
-        Registry.register(Registry.ITEM, myIdentifier(id), BlockItem(BLOCK, itemSettings))
-        return BLOCK
+        val block2 = Registry.register(Registry.BLOCK, myIdentifier(id), block)
+        Registry.register(Registry.ITEM, myIdentifier(id), BlockItem(block2, itemSettings))
+        return block2
     }
 
     private fun block(id: String, material: Material, hardness: Float, resistance: Float, itemSettings: Item.Settings): Block {
-        val BLOCK = Registry.register(Registry.BLOCK, myIdentifier(id), Block(droidsBlockSettings(material, hardness, resistance)))
-        Registry.register(Registry.ITEM, myIdentifier(id), BlockItem(BLOCK, itemSettings))
-        return BLOCK
+        val block = Registry.register(Registry.BLOCK, myIdentifier(id), Block(droidsBlockSettings(material, hardness, resistance)))
+        Registry.register(Registry.ITEM, myIdentifier(id), BlockItem(block, itemSettings))
+        return block
     }
 
     fun register() {
-        block("the_machine_u", THE_MACHINE_U, itemSettings())
-        block("the_machine_d", THE_MACHINE_D, itemSettings())
-
         TIN_ORE = block("tin_ore", Material.STONE, 3.0F, 3.0F, itemSettings())
         LEAD_ORE = block("lead_ore", Material.STONE, 3.0F, 3.0F, itemSettings())
         SILVER_ORE = block("silver_ore", Material.STONE, 3.0F, 3.0F, itemSettings())
