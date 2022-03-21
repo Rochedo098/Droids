@@ -13,6 +13,7 @@ import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 
+@Suppress("LeakingThis")
 object MachineScreen {
     abstract class MachineScreen(handler: ScreenHandler, inventory: PlayerInventory, title: Text): HandledScreen<ScreenHandler>(handler, inventory, title) {
         abstract fun getBackgroundTexture(): Identifier
@@ -39,7 +40,6 @@ object MachineScreen {
     }
 
     abstract class MachineScreenHandler(type: ScreenHandlerType<*>, syncId: Int): ScreenHandler(type, syncId) {
-        // TODO: CHECK IF THIS IS CORRECT
         abstract fun getInventory(): Inventory
         private var inventory: Inventory? = getInventory()
 
@@ -78,7 +78,5 @@ object MachineScreen {
             super.close(player)
             this.inventory!!.onClose(player)
         }
-
-        // TODO: IMPLEMENT THE REST OF FUNCTIONS
     }
 }

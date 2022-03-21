@@ -1,5 +1,6 @@
 package com.github.rochedo098.droids.blocks
 
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.block.entity.LockableContainerBlockEntity
@@ -41,7 +42,8 @@ object MachineBase {
         }
     }
 
-    abstract class MachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: BlockState): LockableContainerBlockEntity(type, pos, state), SidedInventory, RecipeUnlocker, RecipeInputProvider {
+    abstract class MachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: BlockState): LockableContainerBlockEntity(type, pos, state), SidedInventory, RecipeUnlocker, RecipeInputProvider,
+        ExtendedScreenHandlerFactory {
         private var inventory: DefaultedList<ItemStack> = DefaultedList.ofSize(size(), ItemStack.EMPTY)
         private var energyContainer = object : SimpleSidedEnergyContainer() {
             override fun getCapacity(): Long = getMaxEnergyStorage()
