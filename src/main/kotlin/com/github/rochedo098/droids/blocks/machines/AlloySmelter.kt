@@ -1,8 +1,8 @@
-package com.github.rochedo098.droids.blocks.machines.basic
+package com.github.rochedo098.droids.blocks.machines
 
 import com.github.rochedo098.droids.Droids
 import com.github.rochedo098.droids.blocks.MachineBase
-import com.github.rochedo098.droids.screens.machines.basic.AlloySmelterScreen
+import com.github.rochedo098.droids.screens.machines.AlloySmelterScreen
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
@@ -42,7 +42,12 @@ object AlloySmelter {
             type: BlockEntityType<T>
         ): BlockEntityTicker<T> {
             return BlockEntityTicker { world, pos, state, blockEntity ->
-                AlloySmelterBlockEntity.tick(world, pos, state, blockEntity as? AlloySmelterBlockEntity ?: return@BlockEntityTicker)
+                AlloySmelterBlockEntity.tick(
+                    world,
+                    pos,
+                    state,
+                    blockEntity as? AlloySmelterBlockEntity ?: return@BlockEntityTicker
+                )
             }
         }
     }

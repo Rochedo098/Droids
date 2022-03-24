@@ -1,4 +1,4 @@
-package com.github.rochedo098.droids.screens.machines.basic
+package com.github.rochedo098.droids.screens.machines
 
 import com.github.rochedo098.droids.Droids
 import com.github.rochedo098.droids.screens.MachineScreen
@@ -10,12 +10,12 @@ import net.minecraft.screen.slot.Slot
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 
-object AlloySmelterScreen {
-    class AlloySmelterScreen(handler: ScreenHandler, playerInventory: PlayerInventory, title: Text): MachineScreen.MachineScreen(handler, playerInventory, title) {
+object CircuitsAssemblerScreen {
+    class CircuitsAssemblerScreen(handler: ScreenHandler, inventory: PlayerInventory, title: Text): MachineScreen.MachineScreen(handler, inventory, title) {
         override fun getBackgroundTexture(): Identifier = Identifier("minecraft", "textures/gui/container/furnace.png")
     }
 
-    class AlloySmelterScreenHandler(syncId: Int, playerInventory: PlayerInventory): MachineScreen.MachineScreenHandler(Droids.ALLOY_SMELTER_SCREEN_HANDLER!!, syncId) {
+    class CircuitsAssemblerScreenHandler(syncId: Int, playerInventory: PlayerInventory): MachineScreen.MachineScreenHandler(Droids.CIRCUITS_ASSEMBLER_SCREEN_HANDLER!!, syncId) {
         init {
             addSlot(Slot(this.getInventory(), 0, 56, 17))
             addSlot(Slot(this.getInventory(), 1, 56, 53))
@@ -32,8 +32,6 @@ object AlloySmelterScreen {
             }
         }
 
-        override fun getInventory(): Inventory {
-            return SimpleInventory(4)
-        }
+        override fun getInventory(): Inventory = SimpleInventory(10)
     }
 }

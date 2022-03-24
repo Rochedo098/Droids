@@ -2,8 +2,9 @@ package com.github.rochedo098.droids
 
 import com.github.rochedo098.droids.Droids.myIdentifier
 import com.github.rochedo098.droids.DroidsItems.itemSettings
-import com.github.rochedo098.droids.blocks.machines.basic.AlloySmelter
-import com.github.rochedo098.droids.blocks.machines.basic.Crusher
+import com.github.rochedo098.droids.blocks.machines.AlloySmelter
+import com.github.rochedo098.droids.blocks.machines.CircuitsAssembler
+import com.github.rochedo098.droids.blocks.machines.Crusher
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
@@ -24,6 +25,7 @@ object DroidsBlocks {
 
     var ALLOY_SMELTER: Block? = null
     var CRUSHER: Block? = null
+    var CIRCUITS_ASSEMBLER: Block? = null
 
     private fun droidsBlockSettings(material: Material, hardness: Float, resistance: Float): AbstractBlock.Settings =
         FabricBlockSettings.of(material).strength(hardness, resistance)
@@ -51,5 +53,6 @@ object DroidsBlocks {
 
         ALLOY_SMELTER = block("alloy_smelter", AlloySmelter.AlloySmelterBlock(droidsBlockSettings(Material.METAL, 4.0f, 4.0f)), itemSettings())
         CRUSHER = block("crusher", Crusher.CrusherBlock(droidsBlockSettings(Material.METAL, 4.0f, 4.0f)), itemSettings())
+        CIRCUITS_ASSEMBLER = block("crusher", CircuitsAssembler.CircuitsAssemblerBlock(droidsBlockSettings(Material.METAL, 4.0f, 4.0f)), itemSettings())
     }
 }

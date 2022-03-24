@@ -1,9 +1,11 @@
 package com.github.rochedo098.droids
 
-import com.github.rochedo098.droids.blocks.machines.basic.AlloySmelter.AlloySmelterBlockEntity
-import com.github.rochedo098.droids.blocks.machines.basic.Crusher.CrusherBlockEntity
-import com.github.rochedo098.droids.screens.machines.basic.AlloySmelterScreen.AlloySmelterScreenHandler
-import com.github.rochedo098.droids.screens.machines.basic.CrusherScreen.CrusherScreenHandler
+import com.github.rochedo098.droids.blocks.machines.AlloySmelter.AlloySmelterBlockEntity
+import com.github.rochedo098.droids.blocks.machines.CircuitsAssembler.CircuitsAssemblerBlockEntity
+import com.github.rochedo098.droids.blocks.machines.Crusher.CrusherBlockEntity
+import com.github.rochedo098.droids.screens.machines.AlloySmelterScreen.AlloySmelterScreenHandler
+import com.github.rochedo098.droids.screens.machines.CircuitsAssemblerScreen.CircuitsAssemblerScreenHandler
+import com.github.rochedo098.droids.screens.machines.CrusherScreen.CrusherScreenHandler
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
@@ -53,9 +55,11 @@ object  Droids : ModInitializer {
 
     var ALLOY_SMELTER_BLOCK_ENTITY: BlockEntityType<AlloySmelterBlockEntity>? = null
     var CRUSHER_BLOCK_ENTITY: BlockEntityType<CrusherBlockEntity>? = null
+    var CIRCUITS_ASSEMBLER_ENTITY: BlockEntityType<CircuitsAssemblerBlockEntity>? = null
 
     var ALLOY_SMELTER_SCREEN_HANDLER: ScreenHandlerType<AlloySmelterScreenHandler>? = null
     var CRUSHER_SCREEN_HANDLER: ScreenHandlerType<CrusherScreenHandler>? = null
+    var CIRCUITS_ASSEMBLER_SCREEN_HANDLER: ScreenHandlerType<CircuitsAssemblerScreenHandler>? = null
 
     override fun onInitialize() {
         DroidsBlocks.register()
@@ -63,8 +67,10 @@ object  Droids : ModInitializer {
 
         ALLOY_SMELTER_BLOCK_ENTITY = blockEntity(::AlloySmelterBlockEntity, DroidsBlocks.ALLOY_SMELTER!!, "alloy_smelter")
         CRUSHER_BLOCK_ENTITY = blockEntity(::CrusherBlockEntity, DroidsBlocks.CRUSHER!!, "crusher")
+        CIRCUITS_ASSEMBLER_ENTITY = blockEntity(::CircuitsAssemblerBlockEntity, DroidsBlocks.CIRCUITS_ASSEMBLER!!, "circuits_assembler")
 
         ALLOY_SMELTER_SCREEN_HANDLER = screenHandlerType(::AlloySmelterScreenHandler, "alloy_smelter_screen")
         CRUSHER_SCREEN_HANDLER = screenHandlerType(::CrusherScreenHandler, "crusher_screen")
+        CIRCUITS_ASSEMBLER_SCREEN_HANDLER = screenHandlerType(::CircuitsAssemblerScreenHandler, "circuits_assembler_screen")
     }
 }

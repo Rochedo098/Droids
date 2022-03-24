@@ -8,7 +8,6 @@ import net.minecraft.recipe.Ingredient
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 
-
 object ModuleArmor {
     class ModulesArmorMaterial: ArmorMaterial {
         override fun getDurability(slot: EquipmentSlot?): Int  = 0
